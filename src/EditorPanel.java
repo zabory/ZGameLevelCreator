@@ -1,5 +1,3 @@
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,6 +5,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -15,7 +14,7 @@ import javax.swing.Timer;
  * @author Ben Shabowski
  *
  */
-public class EditorPanel extends JPanel implements ActionListener, KeyListener, MouseListener {
+public class EditorPanel extends JPanel implements ActionListener, KeyListener, MouseListener, MouseMotionListener {
 	private static final long serialVersionUID = 1L;
 	//private GameHead game;
 	EditorHead game;
@@ -95,6 +94,16 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 	}
+	@Override
+	public void mouseDragged(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseMoved(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	/**
@@ -112,5 +121,6 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		int[] yPoints = {y - thickness, y2 - thickness, y2 + thickness, y + thickness};
 		g.fillPolygon(xPoints, yPoints, 4);
 	}
+	
 
 }
