@@ -20,13 +20,11 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 	//private GameHead game;
 	EditorHead game;
 	static EditBar topBar;
-	Object o;
 	/**
 	 * constructor for the game
 	 * @param game is the game object. 
 	 */
 	public EditorPanel(EditorHead game){
-		o = new Object(500,500,50,50);
 		topBar = new EditBar();
 		this.game = game;
 		Timer timer = new Timer(5, this);
@@ -50,7 +48,6 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		topBar.paint(g);
-		o.paint(g);
 		
 	}
 	@Override
@@ -93,12 +90,10 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		topBar.mousePressed(arg0);
-		o.mousePressed(arg0);
 	}
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		o.mouseReleased(arg0);
 	}
 	
 	
