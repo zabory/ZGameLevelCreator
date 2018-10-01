@@ -3,11 +3,16 @@ import java.awt.event.MouseEvent;
 
 public class EditBar {
 	
-	Button[] buttons, objectButtons, tileButtons, areaButtons;
+	Button[] buttons;
 	Boolean objectOpen, tileOpen, areaOpen;
+	Path objectPath, tilePath, areaPath;
 	
 	
 	public EditBar() {
+		String[] objects = {"Monsters" , "Towers"};
+		String[] tiles = {"Objectives" , "Traps" , "Floor" , "Wall"};
+		String[] areas = {"Monster spawn"};
+		
 		
 		objectOpen = false;
 		tileOpen = false;
@@ -18,19 +23,9 @@ public class EditBar {
 		buttons[1] = new Button(135,10,25,150,"Tiles");
 		buttons[2] = new Button(285,10,25,185,"Areas");
 		
-		objectButtons = new Button[2];
-		objectButtons[0] = new Button(10,35,25,125,"Monsters");
-		objectButtons[1] = new Button(10,60,25,125,"Towers");
-		
-		tileButtons = new Button[4];
-		tileButtons[0] = new Button(135,35,25,150,"Objectives");
-		tileButtons[1] = new Button(135,60,25,150,"Traps");
-		tileButtons[2] = new Button(135,85,25,150,"Floor");
-		tileButtons[3] = new Button(135,110,25,150,"Wall");
-		
-		areaButtons = new Button[1];
-		areaButtons[0] = new Button(285,35,25,185,"Monster spawn");
-		
+		objectPath = new Path(10,35,25,125,objects);  
+		tilePath = new Path(135,35,25,150,tiles);
+		areaPath = new Path(285,35,25,185,areas);
 	}
 	
 	
@@ -44,11 +39,11 @@ public class EditBar {
 		paintButtons(g);
 		
 		if(objectOpen) {
-			paintObjectButtons(g);
+			objectPath.paint(g);
 		}else if(tileOpen) {
-			paintTileButtons(g);
+			tilePath.paint(g);
 		}else if(areaOpen) {
-			paintAreaButtons(g);
+			areaPath.paint(g);
 		}
 		
 		
@@ -58,56 +53,43 @@ public class EditBar {
 		for(int i = 0; i < buttons.length; i++) {
 			if(buttons[i].inBounds(e.getX(), e.getY())) {
 				System.out.println(buttons[i].getName());
-				
-				if(buttons[i].getName().equals("Objects")) {
-					if(objectOpen){
-						objectOpen = false;
+				//objects menu open logic
+				if(i == 0) {
+					if(objectOpen) {
+						resetMenus();
 					}else{
-					resetMenus();
-					objectOpen = true;
+						resetMenus();
+						objectOpen = true;
 					}
-				}else if(buttons[i].getName().equals("Tiles")) {
+				}
+				//tiles menu open logic
+				if(i == 1) {
 					if(tileOpen) {
-						tileOpen = false;
-					}else {
+						resetMenus();
+					}else{
 						resetMenus();
 						tileOpen = true;
 					}
-				}else if(buttons[i].getName().equals("Areas")) {
+				}
+				//area menu open logic
+				if(i == 2) {
 					if(areaOpen) {
-						areaOpen = false;
-					}else {
+						resetMenus();
+					}else{
 						resetMenus();
 						areaOpen = true;
 					}
 				}
 				
+				
+				
+				
 			}
 		}
 		
-		if(objectOpen) {
-			for(int i = 0; i < objectButtons.length; i++) {
-				if(objectButtons[i].inBounds(e.getX(), e.getY())) {
-					System.out.println(objectButtons[i].getName());
-				}
-			}
-		}
 		
-		if(tileOpen) {
-			for(int i = 0; i < tileButtons.length; i++) {
-				if(tileButtons[i].inBounds(e.getX(), e.getY())) {
-					System.out.println(tileButtons[i].getName());
-				}
-			}
-		}
 		
-		if(areaOpen) {
-			for(int i = 0; i < areaButtons.length; i++) {
-				if(areaButtons[i].inBounds(e.getX(), e.getY())) {
-					System.out.println(areaButtons[i].getName());
-				}
-			}
-		}
+		
 		
 		
 		
@@ -126,23 +108,6 @@ public class EditBar {
 		}
 	}
 	
-	public void paintObjectButtons(Graphics g) {
-		for(int i = 0; i < objectButtons.length; i++) {
-			objectButtons[i].paint(g);
-		}
-	}
-	
-	public void paintTileButtons(Graphics g) {
-		for(int i = 0; i < tileButtons.length; i++) {
-			tileButtons[i].paint(g);
-		}
-	}	
-	
-	public void paintAreaButtons(Graphics g) {
-		for(int i = 0; i < areaButtons.length; i++) {
-			areaButtons[i].paint(g);
-		}
-	}	
 	
 	
 	public void resetMenus() {
