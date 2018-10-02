@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,6 +30,7 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		Timer timer = new Timer(5, this);
 		timer.start();
 		addMouseListener(this);
+		addMouseMotionListener(this);
 		addKeyListener(this);
 		setFocusable(true);
 	}
@@ -46,8 +48,20 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 	 */
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		topBar.paint(g);
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		g.setColor(Color.BLACK);
+		//last thing to paint so it appears over all
+		topBar.paint(g);
 	}
 	@Override
 	/**
@@ -97,7 +111,6 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 	@Override
 	public void mouseMoved(MouseEvent arg0) {

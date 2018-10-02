@@ -11,7 +11,12 @@ public class EditBar {
 	public EditBar() {
 		String[] objects = {"Monsters" , "Towers"};
 		String[] tiles = {"Objectives" , "Traps" , "Floor" , "Wall"};
-		String[] areas = {"Monster spawn"};
+		String[] areas = {"Monster spawn" , "Threat spawn"};
+		
+		String[] trapSub = {"Spikes" , "Arrow" , "Fake chest"};
+		String[] objectiveSub = {"P spawn" , "Exit"};
+		String[] monsterSub = {"Skeleton" , "Wizard" , "Alchemist", "Archer" , "knight" , "warrior"};
+		String[] towerSub = {"Archer" , "Wizard"};
 		
 		
 		objectOpen = false;
@@ -26,6 +31,12 @@ public class EditBar {
 		objectPath = new Path(10,35,25,125,objects);  
 		tilePath = new Path(135,35,25,150,tiles);
 		areaPath = new Path(285,35,25,185,areas);
+		
+		
+		tilePath.subPathCreate("Traps", trapSub);
+		tilePath.subPathCreate("Objectives", objectiveSub);
+		objectPath.subPathCreate("Monsters", monsterSub);
+		objectPath.subPathCreate("Towers", towerSub);
 	}
 	
 	
@@ -50,9 +61,12 @@ public class EditBar {
 	}
 	
 	public void mousePressed(MouseEvent e) {
+		boolean mainButton = false;
+		//goes through all buttons
 		for(int i = 0; i < buttons.length; i++) {
+			//if a mouse click is on a main button
 			if(buttons[i].inBounds(e.getX(), e.getY())) {
-				System.out.println(buttons[i].getName());
+				mainButton = true;
 				//objects menu open logic
 				if(i == 0) {
 					if(objectOpen) {
@@ -80,13 +94,20 @@ public class EditBar {
 						areaOpen = true;
 					}
 				}
-				
-				
-				
-				
 			}
-		}
+		}		
 		
+		if(!mainButton) {
+		
+			if(tileOpen) {
+				tilePath.mousePressed(e);
+			}else if(objectOpen) {
+				objectPath.mousePressed(e);
+			}else if(areaOpen){
+				areaPath.mousePressed(e);
+			}
+			
+		}
 		
 		
 		
@@ -102,6 +123,12 @@ public class EditBar {
 		
 	}
 	
+	
+	
+	/**
+	 * paints main task buttons
+	 * @param g graphics screen
+	 */
 	public void paintButtons(Graphics g) {
 		for(int i = 0; i < buttons.length; i++) {
 			buttons[i].paint(g);
@@ -109,11 +136,16 @@ public class EditBar {
 	}
 	
 	
-	
+	/**
+	 * closes all menus
+	 */
 	public void resetMenus() {
 		objectOpen = false;
 		areaOpen = false;
 		tileOpen = false;
+		objectPath.closePaths();
+		areaPath.closePaths();
+		tilePath.closePaths();
 	}
 	
 	
