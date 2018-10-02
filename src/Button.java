@@ -93,7 +93,7 @@ public class Button {
 		}
 		if(open && inBounds(mx, my)){
 			Close();
-		}else if(inBounds(mx, my)) {
+		}else if(!open && inBounds(mx, my)) {
 			Open();
 		}
 	}
@@ -177,6 +177,7 @@ public class Button {
 	 * marks open as true to open subDs
 	 */
 	public void Open() {
+		System.out.println(name + " is now open.");
 		open = true;
 	}
 	/**

@@ -24,6 +24,7 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 	String message, lastMessage;
 	objectHandler OH;
 	boolean field;
+	boolean test;
 	/**
 	 * constructor for the game
 	 * @param game is the game object. 
@@ -40,6 +41,7 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		message = "";
 		lastMessage = "";
 		field = false;
+		test = true;
 	}
 	/**
 	 * an update method for updating everything in the game, it goes down through all the classes and updates everything 
@@ -135,14 +137,18 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		topBar.mousePressed(arg0);
+		if(test) {
+		test = false;
+			topBar.mousePressed(arg0);
 		if(field) {
 			OH.MousePressed(arg0);
+		}
 		}
 	}
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
+		test = true;
 		if(field) {
 		OH.MouseReleased(arg0);
 		}
