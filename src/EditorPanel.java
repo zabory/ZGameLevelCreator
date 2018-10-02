@@ -20,6 +20,7 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 	//private GameHead game;
 	EditorHead game;
 	static EditBar topBar;
+	String message;
 	/**
 	 * constructor for the game
 	 * @param game is the game object. 
@@ -33,13 +34,14 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		addMouseMotionListener(this);
 		addKeyListener(this);
 		setFocusable(true);
+		message = "";
 	}
 	/**
 	 * an update method for updating everything in the game, it goes down through all the classes and updates everything 
 	 */
 	public void update(){
 		topBar.update();
-		
+		message = topBar.getMessage();
 		
 		}
 	
@@ -53,7 +55,7 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		
 		
 		
-		
+	
 		
 		
 		
@@ -103,6 +105,8 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		topBar.mousePressed(arg0);
+
+		System.out.println("Message: " + message);
 	}
 	@Override
 	public void mouseReleased(MouseEvent arg0) {

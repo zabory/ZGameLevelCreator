@@ -5,7 +5,6 @@ public class EditBar {
 	
 	Button[] buttons;
 	
-	
 	public EditBar() {
 		String[] objects = {"Monsters" , "Towers"};
 		String[] tiles = {"Objectives" , "Traps" , "Floor" , "Wall"};
@@ -53,10 +52,8 @@ public class EditBar {
 		
 		paintButtons(g);
 		
-		
-		
-		
 	}
+	
 	
 	public void mousePressed(MouseEvent e) {
 		boolean[] oldStatus, newStatus;
@@ -90,6 +87,14 @@ public class EditBar {
 				}
 			}
 		}
+		
+		
+		
+		
+		
+		
+		
+		
 	
 	}
 	
@@ -97,7 +102,14 @@ public class EditBar {
 		
 	}
 	
-	
+	public String getMessage() {
+		String message = "";
+		for(int i = 0; i < buttons.length && message.equals(""); i++) {
+			message = buttons[i].getMessage();
+		}
+		
+		return message;
+	}
 	
 	/**
 	 * paints main task buttons

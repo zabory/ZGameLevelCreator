@@ -152,7 +152,19 @@ public class Button {
 		}
 	}
 	
-	
+	public String getMessage() {
+		String message = "";
+		if(open && !more) {
+			message = name;
+		}else if(open && more) {
+			for(int i = 0; i < subPaths.length && message.equals(""); i++) {
+				message = subPaths[i].getMessage();
+			}
+		}
+		
+		return message;
+		
+	}
 
 	
 	
