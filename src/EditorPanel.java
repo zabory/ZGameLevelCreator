@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 /**
@@ -20,7 +21,9 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 	//private GameHead game;
 	EditorHead game;
 	static EditBar topBar;
-	String message;
+	String message, lastMessage;
+	objectHandler OH;
+	boolean field;
 	/**
 	 * constructor for the game
 	 * @param game is the game object. 
@@ -35,6 +38,8 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		addKeyListener(this);
 		setFocusable(true);
 		message = "";
+		lastMessage = "";
+		field = false;
 	}
 	/**
 	 * an update method for updating everything in the game, it goes down through all the classes and updates everything 
@@ -42,16 +47,22 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 	public void update(){
 		topBar.update();
 		message = topBar.getMessage();
-		
+		if(!message.equals(lastMessage) && !message.equals("")) {
+			System.out.println("Message: " + message);
+			messageHandler(message);
+			topBar.resetMenus();
+			lastMessage = message;
 		}
+	}
 	
 	/**
 	 * a paint method for painting everything, it goes down through all the classes and paints everything
 	 */
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		
-		
+		if(field) {	
+			OH.paint(g);
+		}
 		
 		
 		
@@ -65,6 +76,26 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		//last thing to paint so it appears over all
 		topBar.paint(g);
 	}
+	
+	
+	
+	
+	private void messageHandler(String message) {
+		if(message.contains("File")) {
+			if(message.contains("New")) {
+				field = true;
+				System.out.println("New Object Handler");
+				OH = new objectHandler();
+			}else if(message.contains("Rename") && field) {
+				String newName = JOptionPane.showInputDialog("Enter new name:");
+				OH.changeName(newName);
+			}
+		}
+	}
+	
+	
+	
+	
 	@Override
 	/**
 	 * updates and repaints everything every tick
@@ -105,12 +136,16 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		topBar.mousePressed(arg0);
-
-		System.out.println("Message: " + message);
+		if(field) {
+			OH.MousePressed(arg0);
+		}
 	}
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
+		if(field) {
+		OH.MouseReleased(arg0);
+		}
 	}
 	@Override
 	public void mouseDragged(MouseEvent arg0) {

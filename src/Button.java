@@ -1,7 +1,6 @@
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 public class Button {
 
@@ -11,7 +10,14 @@ public class Button {
 	Button[] subPaths;
 	boolean open, more;
 	
-	
+	/**
+	 * constructor for normal button
+	 * @param x
+	 * @param y
+	 * @param height
+	 * @param width
+	 * @param name
+	 */
 	public Button(int x, int y, int height, int width, String name) {
 		this.x = x;
 		this.y = y;
@@ -24,7 +30,15 @@ public class Button {
 		startX = x;
 		startY = y;
 	}
-	
+	/**
+	 * constructor for top button graphicall of the buttons (aka main button)
+	 * @param x
+	 * @param y
+	 * @param height
+	 * @param width
+	 * @param name
+	 * @param n
+	 */
 	public Button(int x, int y, int height, int width, String name, int n) {
 		this.x = x;
 		this.y = y;
@@ -37,7 +51,9 @@ public class Button {
 		startX = x - width;
 		startY = y + height;
 	}
-	
+	/**
+	 * fake button, to make button obejct to return null if nothing is found
+	 */
 	public Button() {
 		
 	}
@@ -46,6 +62,10 @@ public class Button {
 		
 	}
 	
+	/**
+	 * paint button, if open, pain the rest of the sub directory
+	 * @param g
+	 */
 	public void paint(Graphics g) {
 		g.drawRect(x, y, width, height);
 		g.setFont(f);
@@ -57,7 +77,10 @@ public class Button {
 		}
 	}
 	
-	
+	/**
+	 * If open and has a subD, open subD, else if open send a message of name of button
+	 * @param e
+	 */
 	public void mousePressed(MouseEvent e) {
 		int mx = e.getX();
 		int my = e.getY();
@@ -75,6 +98,11 @@ public class Button {
 		}
 	}
 	
+	
+	/**
+	 * creates subDs based off of a string array
+	 * @param paths
+	 */
 	public void createPath(String[] paths) {
 		more = true;
 		subPaths = new Button[paths.length];
@@ -87,7 +115,10 @@ public class Button {
 	
 	
 	
-	
+	/**
+	 * close open sub paths if a new subpath is opened or if its clicked on again
+	 * @param e
+	 */
 	private void closeSubOpen(MouseEvent e) {
 		boolean[] oldStatus, newStatus;
 		
@@ -126,7 +157,11 @@ public class Button {
 	
 	
 	
-	
+	/**
+	 * returns button object of a button with the name of it as input
+	 * @param name the name of the button
+	 * @return button requested
+	 */
 	public Button getButton(String name) {
 		Button yeet = new Button();
 		for(int i = 0; i < subPaths.length; i++) {
@@ -138,11 +173,15 @@ public class Button {
 	}
 	
 	
-	
+	/**
+	 * marks open as true to open subDs
+	 */
 	public void Open() {
 		open = true;
 	}
-	
+	/**
+	 * marks open to false, if it has subDs, closes them
+	 */
 	public void Close() {
 		open = false;
 		if(more) {
@@ -151,7 +190,10 @@ public class Button {
 			}
 		}
 	}
-	
+	/**
+	 * Tests if its the last in directory and if its pressed, returns name of button
+	 * @return name of button
+	 */
 	public String getMessage() {
 		String message = "";
 		if(open && !more) {
@@ -159,6 +201,9 @@ public class Button {
 		}else if(open && more) {
 			for(int i = 0; i < subPaths.length && message.equals(""); i++) {
 				message = subPaths[i].getMessage();
+				if(!message.equals("")) {
+					message = name + "," + message;
+				}
 			}
 		}
 		
@@ -168,11 +213,21 @@ public class Button {
 
 	
 	
-	
+	/**
+	 * a method that returns true if the coordinates are inside of button bounds
+	 * @param x mouse x
+	 * @param y mouse y
+	 * @return boolean in bounds of button
+	 */
 	public boolean inBounds(int x, int y) {
 		return (x >= this.x && x <= this.x + width && 
 				y >= this.y && y <= this.y + height);
 	}	
+	
+	
+	
+	
+	
 	
 	public boolean isOpen() {
 		return open;
@@ -237,21 +292,5 @@ public class Button {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }
