@@ -8,7 +8,7 @@ public class EditBar {
 	public EditBar() {
 		String[] objects = {"Monsters" , "Towers"};
 		String[] tiles = {"Objectives" , "Traps" , "Floor" , "Wall"};
-		String[] areas = {"Monster spawn" , "Threat spawn"};
+		String[] areas = {"Monster spawn" , "Threat spawn" , "Shop" , "Send back" , "Obelisk"};
 		
 		String[] trapSub = {"Spikes" , "Arrow" , "Fake chest"};
 		String[] objectiveSub = {"P spawn" , "Exit"};

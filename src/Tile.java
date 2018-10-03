@@ -2,29 +2,25 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
-public class Object {
+public class Tile {
 
 	int x, y, width, height;
 	boolean moving;
 	
-	
-	public Object(int x, int y) {
+	public Tile(int x, int y) {
 		this.x = x;
 		this.y = y;
-		moving = false;
-		height = 16;
 		width = 16;
+		height = 16;
+		moving = false;
 	}
 	
 	
 	
 	
-	
-	
-
 	public void paint(Graphics g) {
 		g.setColor(Color.BLACK);
-		g.fillOval(x, y, height, width);
+		g.fillRect(x, y, height, width);
 	}
 	
 	public void MousePressed(MouseEvent e) {

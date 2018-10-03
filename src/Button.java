@@ -88,13 +88,14 @@ public class Button {
 		
 		if(open && more) {
 			for(int i = 0; i < subPaths.length; i++) {
-				if(subPaths[i].inBounds(mx, my)) {
+				if(subPaths[i].inBounds(mx, my) && subOpen != i) {
 					closeSubOpen();
 					subOpen = i;
 				}
 				subPaths[i].mousePressed(e);
 			}
-		}else if(open && inBounds(mx, my)){
+		}
+		if(open && inBounds(mx, my)){
 			Close();
 		}else if(!open && inBounds(mx, my)) {
 			Open();

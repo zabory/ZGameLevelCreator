@@ -22,9 +22,10 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 	EditorHead game;
 	static EditBar topBar;
 	String message, lastMessage;
-	objectHandler OH;
-	boolean field;
+	fieldHandler FH;
+	boolean field, placing;
 	boolean test;
+	Placeables toPlace;
 	/**
 	 * constructor for the game
 	 * @param game is the game object. 
@@ -42,6 +43,7 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		lastMessage = "";
 		field = false;
 		test = true;
+		placing = false;
 	}
 	/**
 	 * an update method for updating everything in the game, it goes down through all the classes and updates everything 
@@ -53,6 +55,7 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 			System.out.println("Message: " + message);
 			messageHandler(message);
 			topBar.resetMenus();
+			message = "";
 			lastMessage = message;
 		}
 	}
@@ -63,9 +66,11 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		if(field) {	
-			OH.paint(g);
+			FH.paint(g);
 		}
-		
+		if(placing) {
+			toPlace.paint(g);
+		}
 		
 		
 	
@@ -83,14 +88,31 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 	
 	
 	private void messageHandler(String message) {
+		//File tree
 		if(message.contains("File")) {
 			if(message.contains("New")) {
 				field = true;
-				System.out.println("New Object Handler");
-				OH = new objectHandler();
+				System.out.println("New Field Handler");
+				FH = new fieldHandler();
 			}else if(message.contains("Rename") && field) {
 				String newName = JOptionPane.showInputDialog("Enter new name:");
-				OH.changeName(newName);
+				FH.changeName(newName);
+			}
+		}else if(field) {
+		//Object tree
+		if(message.contains("Objects")) {
+				if(message.contains("Wizard")) {
+					toPlace = new Placeables(50,50,"Object");
+					placing = true;
+				}
+			
+			}
+		//Tile tree
+		else if(message.contains("Tiles")) {
+				if(message.contains("Floor")) {
+					toPlace = new Placeables(50,50,"Tile");
+					placing = true;
+				}
 			}
 		}
 	}
@@ -108,7 +130,9 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 	}
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
+		if(placing) {
+			toPlace.keyPressed(e);
+		}
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {
@@ -137,20 +161,47 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		if(test) {
-		test = false;
-			topBar.mousePressed(arg0);
-		if(field) {
-			OH.MousePressed(arg0);
+		//left click
+		if(arg0.getButton() == 1) {
+			if(!placing) {
+				if(test) {
+					test = false;
+						topBar.mousePressed(arg0);
+						if(field) {
+							FH.MousePressed(arg0);
+						}
+				}
+			}else{
+				if(toPlace.getType().equals("Object")) {
+					System.out.println("Adding object");
+					FH.addObject(toPlace.toObject());
+				}else if(toPlace.getType().equals("Tile")){
+					System.out.println("Adding tile");
+					FH.addTile(toPlace.toTile());
+				}
+			}
+		}//end left click
+		//right click
+		if(arg0.getButton() == 3) {
+			if(placing) {
+				placing = false;
+			}
+			
+			
+		}//end right click
+		
+		if(placing) {
+			toPlace.mousePressed(arg0);
 		}
-		}
+		
+		
 	}
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		test = true;
 		if(field) {
-		OH.MouseReleased(arg0);
+			FH.MouseReleased(arg0);
 		}
 	}
 	@Override
@@ -160,7 +211,9 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+		if(placing) {
+			toPlace.mouseMoved(arg0);
+		}
 	}
 	
 	
