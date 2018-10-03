@@ -23,14 +23,16 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 	static EditBar topBar;
 	String message, lastMessage;
 	fieldHandler FH;
-	boolean field, placing;
+	boolean field, placing, grid, moving;
 	boolean test;
 	Placeables toPlace;
+	int MX, MY;
 	/**
 	 * constructor for the game
 	 * @param game is the game object. 
 	 */
 	public EditorPanel(EditorHead game){
+		grid = false;
 		topBar = new EditBar();
 		this.game = game;
 		Timer timer = new Timer(5, this);
@@ -44,6 +46,8 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		field = false;
 		test = true;
 		placing = false;
+		MX = 0;
+		MY = 0;
 	}
 	/**
 	 * an update method for updating everything in the game, it goes down through all the classes and updates everything 
@@ -72,7 +76,14 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 			toPlace.paint(g);
 		}
 		
-		
+		if(grid) {
+			for(int i = 0; i < 1920; i += 16) {
+				g.drawLine(i, 0, i, 1080);
+			}
+			for(int i = 0; i < 1080; i += 16) {
+				g.drawLine(0, i, 1920, i);
+			}
+		}
 	
 		
 		
@@ -101,7 +112,7 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		}else if(field) {
 		//Object tree
 		if(message.contains("Objects")) {
-				if(message.contains("Wizard")) {
+				if(message.contains("Wizard") && message.contains("Monsters")) {
 					toPlace = new Placeables(50,50,"Object");
 					placing = true;
 				}
@@ -112,6 +123,24 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 				if(message.contains("Floor")) {
 					toPlace = new Placeables(50,50,"Tile");
 					placing = true;
+				}
+			}
+		//View tree
+		else if(message.contains("View")) {
+				if(message.contains("Grid")) {
+					if(grid) {
+						grid = false;
+					}else {
+						grid = true;
+					}
+				}else if(message.contains("Move view")) {
+					if(moving) {
+						moving = false;
+						FH.stopMove();
+					}else {
+						moving = true;
+						FH.move(MX, MY);
+					}
 				}
 			}
 		}
@@ -182,6 +211,9 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 			}
 		}//end left click
 		//right click
+		if(moving) {
+			moving = false;
+		}
 		if(arg0.getButton() == 3) {
 			if(placing) {
 				placing = false;
@@ -210,7 +242,8 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 	}
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		MX = arg0.getX();
+		MY = arg0.getY();
 		if(placing) {
 			toPlace.mouseMoved(arg0);
 		}

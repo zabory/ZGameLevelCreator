@@ -4,8 +4,8 @@ import java.awt.event.MouseEvent;
 
 public class Object {
 
-	int x, y, width, height;
-	boolean moving;
+	int x, y, width, height, startX, startY, MX, MY;
+	boolean moving, gridMove;
 	
 	
 	public Object(int x, int y) {
@@ -19,7 +19,11 @@ public class Object {
 	
 	
 	
-	
+	public void move(int x, int y) {
+		gridMove = true;
+		startX = x;
+		startY = y;
+	}
 	
 
 	public void paint(Graphics g) {
@@ -34,10 +38,14 @@ public class Object {
 	}
 	
 	public void MouseReleased(MouseEvent e) {
-		
+		MX = e.getX();
+		MY = e.getY();
 		if(moving) {
-			x = e.getX() - width / 2;
-			y = e.getY() - height / 2;
+			int mouseX, mouseY;
+			mouseX = e.getX();
+			mouseY = e.getY();
+		x = (mouseX / width) * width;
+		y = (mouseY / height) * height;
 			moving = false;
 		}
 	}
@@ -48,5 +56,10 @@ public class Object {
 				y >= this.y && y <= this.y + height);
 	}
 	
+	public void stopMove() {
+		gridMove = false;
+		x = x + (startX - MX);
+		y = y + (startY - MY);
+	}
 	
 }

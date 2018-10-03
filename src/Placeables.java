@@ -8,6 +8,7 @@ public class Placeables {
 	String type;
 	int height = 16;
 	int width = 16;
+	int mouseX, mouseY;
 	
 	public Placeables(int x, int y, String type) {
 		this.x = x;
@@ -17,6 +18,7 @@ public class Placeables {
 	}
 	
 	public void keyPressed(KeyEvent e) {
+		if(type.equals("Tile")) {
 		if(e.getKeyCode() == 91 && size > 1) {
 			size--;
 		}else if(e.getKeyCode() == 93 && size < 5) {
@@ -24,13 +26,22 @@ public class Placeables {
 		}
 		System.out.println(size);
 	}
-	
-	public void update() {
+	}
+	public void update() {		
 		
 	}
 	
 	public void paint(Graphics g) {
-		g.fillOval(x, y, height, width);
+		if(type.equals("Tile")) {
+		int size2 = ((size * 2) - 1) ;
+		for(int i = 0; i < size2; i++) {
+			for(int j = 0; j < size2; j++) {
+				g.fillRect(x - (((size2 - 1) * width) / 2) + (((size2 - 1) - j) * width), y - (((size2 - 1) * height) / 2) + (((size2 - 1) - i) * height), height, width);
+			}
+		}
+		}else if(type.equals("Object")) {
+			g.fillOval(x, y, width, height);
+		}
 	}
 	
 	public void mousePressed(MouseEvent e) {
@@ -42,8 +53,11 @@ public class Placeables {
 	}
 	
 	public void mouseMoved(MouseEvent e) {
-			x = e.getX() - width / 2;
-			y = e.getY() - height / 2;
+			mouseX = e.getX();
+			mouseY = e.getY();
+		x = (mouseX / width) * width;
+		y = (mouseY / height) * height;
+			
 		
 	}
 	
@@ -59,8 +73,13 @@ public class Placeables {
 	
 	public Tile[] toTile() {
 		Tile[] t = new Tile[(size * 2 - 1) * (size * 2 - 1)];
-		for(int i = 0; i < t.length; i++) {
-			t[i] = new Tile(x,y);
+		int counter = 0;
+		int size2 = ((size * 2) - 1) ;
+		for(int i = 0; i < size2; i++) {
+			for(int j = 0; j < size2; j++) {
+				t[counter] = new Tile(x - (((size2 - 1) * width) / 2) + (((size2 - 1) - j) * width), y - (((size2 - 1) * height) / 2) + (((size2 - 1) - i) * height));
+				counter++;
+			}
 		}
 		return t;
 	}

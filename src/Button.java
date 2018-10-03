@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
@@ -68,6 +69,9 @@ public class Button {
 	 * @param g
 	 */
 	public void paint(Graphics g) {
+		g.setColor(Color.WHITE);
+		g.fillRect(x, y, width, height);
+		g.setColor(Color.BLACK);
 		g.drawRect(x, y, width, height);
 		g.setFont(f);
 		g.drawString(name, x + 1, y + height - 3);

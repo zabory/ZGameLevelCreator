@@ -22,6 +22,11 @@ public class tileHandler {
 		}
 	}
 	
+	public void stopMove() {
+		for(int i = 0; i < tileCounter; i++) {
+			tiles[i].stopMove();
+		}
+	}
 	
 	public void paint(Graphics g) {
 		for(int i = 0; i < tileCounter; i++) {
@@ -46,7 +51,11 @@ public class tileHandler {
 		}
 	}
 
-
+	public void move(int x, int y) {
+		for(int i = 0; i < tileCounter; i++) {
+			tiles[i].move(x, y);
+		}
+	}
 
 
 	

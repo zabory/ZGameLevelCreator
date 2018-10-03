@@ -4,8 +4,8 @@ import java.awt.event.MouseEvent;
 
 public class Tile {
 
-	int x, y, width, height;
-	boolean moving;
+	int x, y, width, height, startX, startY, MX, MY;
+	boolean moving, gridMove;
 	
 	public Tile(int x, int y) {
 		this.x = x;
@@ -13,6 +13,7 @@ public class Tile {
 		width = 16;
 		height = 16;
 		moving = false;
+		gridMove = false;
 	}
 	
 	
@@ -30,19 +31,34 @@ public class Tile {
 	}
 	
 	public void MouseReleased(MouseEvent e) {
-		
+		MX = e.getX();
+		MY = e.getY();
+		int mouseX, mouseY;
 		if(moving) {
-			x = e.getX() - width / 2;
-			y = e.getY() - height / 2;
+			mouseX = e.getX();
+			mouseY = e.getY();
+		x = (mouseX / width) * width;
+		y = (mouseY / height) * height;
 			moving = false;
 		}
 	}
 	
+	public void move(int x, int y) {
+		gridMove = true;
+		startX = x;
+		startY = y;
+	}
 	
 	public boolean inBounds(int x, int y) {
 		return (x >= this.x && x <= this.x + width && 
 				y >= this.y && y <= this.y + height);
-	}
-	
+	}	
+	public void stopMove() {
+		gridMove = false;
+		moving = false;
+		x = x + (startX - MX);
+		y = y + (startY - MY);
+		System.out.println("Moved");
+	}	
 	
 }

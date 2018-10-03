@@ -6,6 +6,7 @@ public class fieldHandler {
 
 	objectHandler OH;
 	tileHandler TH;
+	int xOrig, yOrig;
 	
 	String name;
 	Font f;
@@ -15,6 +16,8 @@ public class fieldHandler {
 		TH = new tileHandler();
 		name = "Un-named Level";
 		f = new Font("Courier New", Font.PLAIN, 40);
+		xOrig = 0;
+		yOrig = 0;
 	}
 	
 	
@@ -23,9 +26,15 @@ public class fieldHandler {
 	
 	
 	
+	public void stopMove() {
+		OH.stopMove();
+		TH.stopMove();
+	}
 	
-	
-	
+	public void move(int x, int y) {
+		OH.move(x, y);
+		TH.move(x, y);
+	}
 	
 	public void MouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub

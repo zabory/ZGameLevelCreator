@@ -22,7 +22,7 @@ public class EditBar {
 		String[] sSub = {"Giant" , "Large" , "Medium" , "Small"};
 		String[] sSub2 = {"Blue" , "Red", "Green" , "Orange"};
 		
-		String[] views = {"Move view" , "test"};
+		String[] views = {"Move view" , "Grid"};
 		
 		String[] files = {"New" , "Open" , "Export", "Rename"};
 

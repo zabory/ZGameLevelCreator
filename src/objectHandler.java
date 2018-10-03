@@ -26,6 +26,19 @@ public class objectHandler {
 	}
 	
 	
+	public void move(int x, int y) {
+		for(int i = 0; i < objectCounter; i++) {
+			objects[i].move(x, y);
+		}
+	}
+	
+	public void stopMove() {
+		for(int i = 0; i < objectCounter; i++) {
+			objects[i].stopMove();
+		}
+	}
+	
+	
 	public void createObject(String input){
 		
 	}
@@ -42,6 +55,6 @@ public class objectHandler {
 		}
 	}
 
-
+	
 
 }
