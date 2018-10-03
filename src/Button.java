@@ -9,6 +9,7 @@ public class Button {
 	Font f;
 	Button[] subPaths;
 	boolean open, more;
+	int subOpen;
 	
 	/**
 	 * constructor for normal button
@@ -52,7 +53,7 @@ public class Button {
 		startY = y + height;
 	}
 	/**
-	 * fake button, to make button obejct to return null if nothing is found
+	 * fake button, to make button object to return null if nothing is found
 	 */
 	public Button() {
 		
@@ -87,15 +88,19 @@ public class Button {
 		
 		if(open && more) {
 			for(int i = 0; i < subPaths.length; i++) {
+				if(subPaths[i].inBounds(mx, my)) {
+					closeSubOpen();
+					subOpen = i;
+				}
 				subPaths[i].mousePressed(e);
-				closeSubOpen(e);
 			}
-		}
-		if(open && inBounds(mx, my)){
+		}else if(open && inBounds(mx, my)){
 			Close();
 		}else if(!open && inBounds(mx, my)) {
 			Open();
+			
 		}
+		
 	}
 	
 	
@@ -104,6 +109,7 @@ public class Button {
 	 * @param paths
 	 */
 	public void createPath(String[] paths) {
+		subOpen = paths.length;
 		more = true;
 		subPaths = new Button[paths.length];
 		for(int i = 0; i < paths.length; i++) {
@@ -119,37 +125,9 @@ public class Button {
 	 * close open sub paths if a new subpath is opened or if its clicked on again
 	 * @param e
 	 */
-	private void closeSubOpen(MouseEvent e) {
-		boolean[] oldStatus, newStatus;
-		
-		oldStatus = new boolean[subPaths.length];
-		
+	private void closeSubOpen() {
 		for(int i = 0; i < subPaths.length; i++) {
-			oldStatus[i] = subPaths[i].isOpen();
-		}
-		
-		for(int i = 0; i < subPaths.length; i++) {
-			subPaths[i].mousePressed(e);
-		}
-		
-		newStatus = new boolean[subPaths.length];
-		
-		for(int i = 0; i < subPaths.length; i++) {
-			newStatus[i] = subPaths[i].isOpen();
-		}
-		
-		for(int i = 0; i < subPaths.length; i++) {
-			if(oldStatus[i] && newStatus[i]) {
-				boolean close = false;
-				for(int j = 0; j < subPaths.length; j++) {
-					if(newStatus[j] && j != i) {
-						close = true;
-					}
-				}
-				if(close) {
-					subPaths[i].Close();
-				}
-			}
+			subPaths[i].Close();
 		}
 	}
 	
@@ -164,9 +142,11 @@ public class Button {
 	 */
 	public Button getButton(String name) {
 		Button yeet = new Button();
-		for(int i = 0; i < subPaths.length; i++) {
+		boolean yote = true;
+		for(int i = 0; i < subPaths.length && yote; i++) {
 			if(subPaths[i].getName().equals(name)) {
 				yeet = subPaths[i];
+				yote = false;
 			}
 		}
 		return yeet;
@@ -177,7 +157,6 @@ public class Button {
 	 * marks open as true to open subDs
 	 */
 	public void Open() {
-		System.out.println(name + " is now open.");
 		open = true;
 	}
 	/**
