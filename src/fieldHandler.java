@@ -36,10 +36,10 @@ public class fieldHandler {
 		TH.move(x, y);
 	}
 	
-	public void MouseReleased(MouseEvent arg0) {
+	public void MouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		OH.MouseReleased(arg0);
-		TH.MouseReleased(arg0);
+		OH.MouseReleased(e);
+		TH.MouseReleased(e);
 	}
 
 	public void addObject(Object object) {
@@ -50,9 +50,9 @@ public class fieldHandler {
 		TH.addTile(tiles);
 	}
 
-	public void MousePressed(MouseEvent arg0) {
-		OH.MousePressed(arg0);
-		TH.MousePressed(arg0);
+	public void MousePressed(int x, int y) {
+		OH.MousePressed(x,y);
+		TH.MousePressed(x,y);
 		
 	}
 

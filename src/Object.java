@@ -31,8 +31,8 @@ public class Object {
 		g.fillOval(x, y, height, width);
 	}
 	
-	public void MousePressed(MouseEvent e) {
-		if(inBounds(e.getX(), e.getY())) {
+	public void MousePressed(int x, int y) {
+		if(inBounds(x, y)) {
 			moving = true;
 		}
 	}

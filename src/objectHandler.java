@@ -43,9 +43,9 @@ public class objectHandler {
 		
 	}
 	
-	public void MousePressed(MouseEvent e) {
+	public void MousePressed(int x, int y) {
 		for(int i = 0; i < objectCounter; i++) {
-			objects[i].MousePressed(e);
+			objects[i].MousePressed(x,y);
 		}
 	}
 	

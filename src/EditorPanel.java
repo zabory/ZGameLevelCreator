@@ -26,7 +26,8 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 	boolean field, placing, grid, moving;
 	boolean test;
 	Placeables toPlace;
-	int MX, MY;
+	int MX, MY, startX, startY, origX, origY;
+	
 	/**
 	 * constructor for the game
 	 * @param game is the game object. 
@@ -46,8 +47,9 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		field = false;
 		test = true;
 		placing = false;
-		MX = 0;
-		MY = 0;
+		moving = false;
+		origX = 0;
+		origY = 0;
 	}
 	/**
 	 * an update method for updating everything in the game, it goes down through all the classes and updates everything 
@@ -86,13 +88,15 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		}
 	
 		
-		
+		g.translate(-origX,-origY);
 		
 		
 		
 		g.setColor(Color.BLACK);
-		//last thing to paint so it appears over all
 		topBar.paint(g);
+		
+		
+		g.translate(origX, origY);
 	}
 	
 	
@@ -136,10 +140,8 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 				}else if(message.contains("Move view")) {
 					if(moving) {
 						moving = false;
-						FH.stopMove();
 					}else {
 						moving = true;
-						FH.move(MX, MY);
 					}
 				}
 			}
@@ -175,6 +177,7 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 	}
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
+		System.out.println("(" + arg0.getX() + "," + arg0.getY() + ")");
 		// TODO Auto-generated method stub
 	}
 	@Override
@@ -190,14 +193,19 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
+		if(moving) {
+			MX = arg0.getX();
+			MY = arg0.getY();
+		}
 		//left click
+		
 		if(arg0.getButton() == 1) {
 			if(!placing) {
 				if(test) {
 					test = false;
 						topBar.mousePressed(arg0);
 						if(field) {
-							FH.MousePressed(arg0);
+							FH.MousePressed(arg0.getX(), arg0.getY());
 						}
 				}
 			}else{
@@ -211,10 +219,10 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 			}
 		}//end left click
 		//right click
-		if(moving) {
-			moving = false;
-		}
 		if(arg0.getButton() == 3) {
+			if(moving) {
+				moving = false;
+			}
 			if(placing) {
 				placing = false;
 			}
@@ -234,6 +242,12 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		test = true;
 		if(field) {
 			FH.MouseReleased(arg0);
+		}
+		if(moving) {
+			origX = origX - (MX - arg0.getX());
+			origY = origY - (MY - arg0.getY());
+			System.out.println("Shift X: " + origX);
+			System.out.println("Shift Y: " + origY);
 		}
 	}
 	@Override

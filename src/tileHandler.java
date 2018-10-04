@@ -39,9 +39,9 @@ public class tileHandler {
 		
 	}
 	
-	public void MousePressed(MouseEvent e) {
+	public void MousePressed(int x, int y) {
 		for(int i = 0; i < tileCounter; i++) {
-			tiles[i].MousePressed(e);
+			tiles[i].MousePressed(x, y);
 		}
 	}
 	
