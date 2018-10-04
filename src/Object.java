@@ -1,11 +1,20 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 public class Object {
 
 	int x, y, width, height, startX, startY, MX, MY;
 	boolean moving, gridMove;
+	BufferedImage icon;
 	
 	
 	public Object(int x, int y) {
@@ -14,6 +23,11 @@ public class Object {
 		moving = false;
 		height = 16;
 		width = 16;
+		try {
+		    icon = ImageIO.read(new File("WizardHat.png"));
+		} catch (IOException e) {
+			
+		}
 	}
 	
 	
@@ -28,7 +42,8 @@ public class Object {
 
 	public void paint(Graphics g) {
 		g.setColor(Color.BLACK);
-		g.fillOval(x, y, height, width);
+		//g.fillOval(x, y, height, width);
+		g.drawImage(icon, x, y, null);
 	}
 	
 	public void MousePressed(int x, int y) {

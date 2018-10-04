@@ -71,6 +71,7 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 	 */
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
+		g.translate(origX, origY);
 		if(field) {	
 			FH.paint(g);
 		}
@@ -96,7 +97,6 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		topBar.paint(g);
 		
 		
-		g.translate(origX, origY);
 	}
 	
 	
@@ -109,7 +109,9 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 				field = true;
 				System.out.println("New Field Handler");
 				FH = new fieldHandler();
-			}else if(message.contains("Rename") && field) {
+				origX = 0;
+				origY = 0;
+				}else if(message.contains("Rename") && field) {
 				String newName = JOptionPane.showInputDialog("Enter new name:");
 				FH.changeName(newName);
 			}
