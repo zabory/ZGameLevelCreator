@@ -19,9 +19,26 @@ public class Tile {
 	
 	
 	
-	public void paint(Graphics g) {
+	public void paint(Graphics g, boolean n, boolean e, boolean s, boolean w) {
 		g.setColor(Color.BLACK);
-		g.fillRect(x, y, height, width);
+	
+		if(!n) {
+			paintLine(g, x, y, x + width, y, 2);
+		}
+		if(!e) {
+			paintLine(g, x + width, y, x + width, y + height, 2);
+		}
+		if(!s) {
+			paintLine(g, x + width, y + height, x, y + height, 2);
+		}
+		if(!w) {
+			paintLine(g, x, y + height, x, y, 2);
+		}
+		g.drawLine(x, y, x + width, y + height);
+		
+		
+		
+		
 	}
 	
 	public void MousePressed(int x, int y) {
@@ -60,5 +77,22 @@ public class Tile {
 		y = y + (startY - MY);
 		System.out.println("Moved");
 	}	
+	
+	public int getX() {
+		return x;
+	}
+	
+	public int getY() {
+		return y;
+	}
+	
+	public void paintLine(Graphics g, int x, int y, int x2, int y2, int thickness) {
+		thickness /= 2;
+		int[] xPoints = {x + thickness,x2 + thickness, x2 - thickness, x - thickness};
+		int[] yPoints = {y - thickness, y2 - thickness, y2 + thickness, y + thickness};
+		g.fillPolygon(xPoints, yPoints, 4);
+	}
+	
+	
 	
 }

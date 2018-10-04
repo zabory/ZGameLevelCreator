@@ -30,7 +30,36 @@ public class tileHandler {
 	
 	public void paint(Graphics g) {
 		for(int i = 0; i < tileCounter; i++) {
-			tiles[i].paint(g);
+			boolean n, e, s, w;
+			n = false;
+			e = false;
+			s = false;
+			w = false;
+			//north testing
+			for(int j = 0; j < tileCounter; j++) {
+				if(tiles[j].inBounds(tiles[i].getX() + 8,tiles[i].getY() - 8)) {
+					n = true;
+				}
+			}
+			//east testing
+			for(int j = 0; j < tileCounter; j++) {
+				if(tiles[j].inBounds(tiles[i].getX() + 18,tiles[i].getY() + 8)) {
+					e = true;
+				}
+			}
+			//south testing
+			for(int j = 0; j < tileCounter; j++) {
+				if(tiles[j].inBounds(tiles[i].getX() + 8,tiles[i].getY() + 18)) {
+					s = true;
+				}
+			}
+			//west testing
+			for(int j = 0; j < tileCounter; j++) {
+				if(tiles[j].inBounds(tiles[i].getX() - 8,tiles[i].getY() + 8)) {
+					w = true;
+				}
+			}
+			tiles[i].paint(g, n, e, s, w);
 		}
 	}
 	
