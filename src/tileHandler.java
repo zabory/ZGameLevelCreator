@@ -17,8 +17,16 @@ public class tileHandler {
 	
 	public void addTile(Tile[] o) {
 		for(int i = 0; i < o.length; i++) {
+			boolean add = true;
+			for(int j = 0; j < tileCounter; j++) {
+				if(tiles[j].inBounds(o[i].getX() + 8, o[i].getY() + 8)) {
+					add = false;
+				}
+			}
+			if(add) {
 			tiles[tileCounter] = o[i];
 			tileCounter++;
+			}
 		}
 	}
 	

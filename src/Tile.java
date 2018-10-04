@@ -35,10 +35,6 @@ public class Tile {
 			paintLine(g, x, y + height, x, y, 2);
 		}
 		g.drawLine(x, y, x + width, y + height);
-		
-		
-		
-		
 	}
 	
 	public void MousePressed(int x, int y) {

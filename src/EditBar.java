@@ -6,7 +6,7 @@ public class EditBar {
 	Button[] buttons;
 	
 	public EditBar() {
-		String[] objects = {"Monsters" , "Towers"};
+		String[] objects = {"Monsters" , "Towers" , "Misc"};
 		String[] tiles = {"Objectives" , "Traps" , "Floor" , "Wall"};
 		String[] areas = {"Monster spawn" , "Threat spawn" , "Shop" , "Send back" , "Obelisk"};
 		
@@ -25,6 +25,8 @@ public class EditBar {
 		String[] views = {"Move view" , "Grid"};
 		
 		String[] files = {"New" , "Open" , "Export", "Rename"};
+		
+		String[] misc = {"Barrel" , "Crate" , "Statue"};
 
 		buttons = new Button[5];
 		buttons[0] = new Button(10,10,25,125,"File", 1);
@@ -34,6 +36,8 @@ public class EditBar {
 		
 		buttons[0].createPath(files);
 		
+		
+		
 		buttons[4] = new Button(800,10,25,185,"View", 1);
 		
 		
@@ -42,6 +46,7 @@ public class EditBar {
 		buttons[3].createPath(areas);
 		
 		buttons[1].getButton("Monsters").createPath(monsterSub);
+		buttons[1].getButton("Misc").createPath(misc);
 		
 		buttons[1].getButton("Monsters").getButton("Skeleton").createPath(skeletonSub);
 		buttons[1].getButton("Monsters").getButton("Skeleton").getButton("Boss").createPath(sSub);
