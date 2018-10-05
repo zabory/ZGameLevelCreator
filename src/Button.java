@@ -11,7 +11,8 @@ public class Button {
 	Button[] subPaths;
 	boolean open, more;
 	int subOpen;
-	
+	int type, subW, subH;
+	int tickWait;
 	/**
 	 * constructor for normal button
 	 * @param x
@@ -31,6 +32,9 @@ public class Button {
 		more = false;
 		startX = x;
 		startY = y;
+
+		System.out.println("Button <" + name + "> has been created.");
+		type = 0;
 	}
 	/**
 	 * constructor for top button graphicall of the buttons (aka main button)
@@ -50,8 +54,14 @@ public class Button {
 		f = new Font("Courier New", Font.PLAIN, height - 2);
 		open = false;
 		more = false;
+		if(n != 2) {
 		startX = x - width;
-		startY = y + height;
+				startY = y + height;
+		}else {
+			startX = x;
+			startY = y;
+		}
+		type = n;
 	}
 	/**
 	 * fake button, to make button object to return null if nothing is found
@@ -61,7 +71,13 @@ public class Button {
 	}
 	
 	public void update() {
-		
+		if(tickWait <= 0 && tickWait != 50) {
+		open = false;
+		tickWait = 50;
+		}
+		if(tickWait != 50){
+			tickWait--;
+		}
 	}
 	
 	/**
@@ -69,12 +85,14 @@ public class Button {
 	 * @param g
 	 */
 	public void paint(Graphics g) {
-		g.setColor(Color.WHITE);
-		g.fillRect(x, y, width, height);
-		g.setColor(Color.BLACK);
-		g.drawRect(x, y, width, height);
-		g.setFont(f);
-		g.drawString(name, x + 1, y + height - 3);
+		if(type != 2) {
+			g.setColor(Color.WHITE);
+			g.fillRect(x, y, width, height);
+			g.setColor(Color.BLACK);
+			g.drawRect(x, y, width, height);
+			g.setFont(f);
+			g.drawString(name, x + 1, y + height - 3);
+		}
 		if(open && more) {
 			for(int i = 0; i < subPaths.length; i++) {
 				subPaths[i].paint(g);
@@ -103,8 +121,25 @@ public class Button {
 			Close();
 		}else if(!open && inBounds(mx, my)) {
 			Open();
-			
 		}
+		
+		boolean clickedOn = false;
+		if(inBounds(mx,my)) {
+			clickedOn = true;
+		}else{
+			if(more) {
+				for(int i = 0; i < subPaths.length && !clickedOn; i++) {
+					if(subPaths[i].inBounds(mx, my)) {
+						clickedOn = true;
+					}
+				}
+			}
+		}
+		
+		if(!clickedOn) {
+			Close();
+		}
+		
 		
 	}
 	
@@ -118,7 +153,11 @@ public class Button {
 		more = true;
 		subPaths = new Button[paths.length];
 		for(int i = 0; i < paths.length; i++) {
+			if(type != 2) {
 			subPaths[i] = new Button(startX + width, startY + (height * i), height, width, paths[i]);
+			}else {
+				subPaths[i] = new Button(startX + width, startY + (height * i), subH, subW, paths[i]);
+			}
 		}
 	}
 
@@ -162,12 +201,15 @@ public class Button {
 	 * marks open as true to open subDs
 	 */
 	public void Open() {
+		System.out.println("Button <" + name + "> has been opened.");
 		open = true;
 	}
 	/**
 	 * marks open to false, if it has subDs, closes them
 	 */
 	public void Close() {
+		if(open)
+		System.out.println("Button <" + name + "> has been closed.");
 		open = false;
 		if(more) {
 			for(int i = 0; i < subPaths.length; i++) {
@@ -277,5 +319,19 @@ public class Button {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public int getSubW() {
+		return subW;
+	}
+	public void setSubW(int subW) {
+		this.subW = subW;
+	}
+	public int getSubH() {
+		return subH;
+	}
+	public void setSubH(int subH) {
+		this.subH = subH;
+	}
+	
+	
 	
 }

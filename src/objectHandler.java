@@ -38,14 +38,19 @@ public class objectHandler {
 		}
 	}
 	
+	public void update() {
+		for(int i = 0; i < objectCounter; i++) {
+			objects[i].update();
+		}
+	}
 	
 	public void createObject(String input){
 		
 	}
 	
-	public void MousePressed(int x, int y) {
+	public void MousePressed(int x, int y, MouseEvent e) {
 		for(int i = 0; i < objectCounter; i++) {
-			objects[i].MousePressed(x,y);
+			objects[i].MousePressed(x,y,e);
 		}
 	}
 	

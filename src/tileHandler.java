@@ -30,6 +30,14 @@ public class tileHandler {
 		}
 	}
 	
+	public void update() {
+		for(int i = 0; i < tileCounter; i++) {
+			tiles[i].update();
+		}
+	}
+	
+	
+	
 	public void stopMove() {
 		for(int i = 0; i < tileCounter; i++) {
 			tiles[i].stopMove();

@@ -43,6 +43,10 @@ public class Tile {
 		}
 	}
 	
+	public void update() {
+		
+	}
+	
 	public void MouseReleased(MouseEvent e) {
 		MX = e.getX();
 		MY = e.getY();

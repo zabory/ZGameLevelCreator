@@ -66,7 +66,9 @@ public class EditBar {
 	
 	
 	public void update() {
-	
+		for(int i = 0; i < buttons.length; i++) {
+			buttons[i].update();
+		}
 	}
 	
 	public void paint(Graphics g) {

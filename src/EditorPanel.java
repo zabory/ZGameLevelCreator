@@ -64,6 +64,10 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 			message = "";
 			lastMessage = message;
 		}
+
+		if(field) {
+			FH.update();
+		}
 	}
 	
 	/**
@@ -179,7 +183,7 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 	}
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		System.out.println("(" + arg0.getX() + "," + arg0.getY() + ")");
+		//System.out.println("(" + arg0.getX() + "," + arg0.getY() + ")");
 		// TODO Auto-generated method stub
 	}
 	@Override
@@ -207,7 +211,7 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 					test = false;
 						topBar.mousePressed(arg0);
 						if(field) {
-							FH.MousePressed(arg0.getX(), arg0.getY());
+							FH.MousePressed(arg0.getX(), arg0.getY(), arg0);
 						}
 				}
 			}else{

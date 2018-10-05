@@ -50,10 +50,15 @@ public class fieldHandler {
 		TH.addTile(tiles);
 	}
 
-	public void MousePressed(int x, int y) {
-		OH.MousePressed(x,y);
+	public void MousePressed(int x, int y, MouseEvent e) {
+		OH.MousePressed(x,y,e);
 		TH.MousePressed(x,y);
 		
+	}
+	
+	public void update() {
+		OH.update();
+		TH.update();
 	}
 
 	public void changeName(String newName) {
