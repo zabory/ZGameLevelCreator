@@ -14,9 +14,43 @@ public class objectHandler {
 	
 	public void addObject(Object o) {
 		objects[objectCounter] = o;
+		if(o.getID() == -1) {
+			o.setID(objectCounter);
+		}
 		System.out.println("Object " + objectCounter + " created.");
 		objectCounter++;
 	}
+	
+	public void deleteObject(int id) {
+		Object temp[] = new Object[10000];
+		int ocHolder =  0;
+		int counter = 0;
+		
+		for(int i = 0; i < objectCounter; i++) {
+			if(objects[i].getID() != id) {
+				temp[counter] = objects[i];
+				counter++;
+			}
+		}
+		
+		for(int i = 0; i < counter; i++) {
+			temp[i].setID(i);
+		}
+		
+		
+		
+		objects = temp;
+		objectCounter = counter;
+	}
+	
+	public String getMessage() {
+		String message = "";
+		for(int i = 0; i < objectCounter && message.equals(""); i++) {
+			message = objects[i].getMessage();
+		}
+		return message;
+	}
+	
 	
 	
 	public void paint(Graphics g) {

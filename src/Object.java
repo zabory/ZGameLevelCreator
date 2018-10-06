@@ -11,19 +11,20 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 public class Object {
-
-	int x, y, width, height, startX, startY, MX, MY;
+	String type;
+	int x, y, width, height, startX, startY, MX, MY, id;
 	boolean moving, gridMove;
 	BufferedImage icon;
 	Button options;
 	String[] opts = {"Delete" , "Attributes", "Count"};
 	
-	public Object(int x, int y) {
+	public Object(int x, int y, int id, String type) {
 		this.x = x;
 		this.y = y;
 		moving = false;
 		height = 16;
 		width = 16;
+		this.type = type;
 		try {
 		    icon = ImageIO.read(new File("WizardHat.png"));
 		} catch (IOException e) {
@@ -33,9 +34,12 @@ public class Object {
 		options.setSubH(16);
 		options.setSubW(100);
 		options.createPath(opts);
+		this.id = id;
 	}
 	
-	
+	public int getID() {
+		return id;
+	}
 	
 	
 	public void move(int x, int y) {
@@ -44,20 +48,30 @@ public class Object {
 		startY = y;
 	}
 	
+	public String getMessage() {
+		String message = "";
+		String oMessage = options.getMessage();
+		if(!oMessage.equals("")) {
+			message = "object " + id + " " + oMessage;
+		}
+		return message;
+	}
 
 	public void paint(Graphics g) {
 		g.setColor(Color.BLACK);
 		//g.fillOval(x, y, height, width);
 		g.drawImage(icon, x, y, null);
 		options.paint(g);
+		g.drawString( id + "", x + width / 2, y + height);
 	}
 	
 	public void MousePressed(int x, int y, MouseEvent e) {
 		if(inBounds(x, y) && e.getButton() == 1) {
 			moving = true;
 		}
-		if(e.getButton() == 3) {
-			System.out.print("Right clicked");
+		if(e.getButton() == 3 && !options.isOpen()) {
+			options.mousePressed(e);
+		}else if(options.isOpen()) {
 			options.mousePressed(e);
 		}
 	}
@@ -66,15 +80,16 @@ public class Object {
 		MX = e.getX();
 		MY = e.getY();
 		if(moving) {
-			options = new Button(x,y,height,width,"",2);
-			options.createPath(opts);
 			int mouseX, mouseY;
 			mouseX = e.getX();
 			mouseY = e.getY();
 		x = (mouseX / width) * width;
 		y = (mouseY / height) * height;
-		options.setX(x);
-		options.setY(y);
+
+		options = new Button(x,y,height,width,"",2);
+		options.setSubH(16);
+		options.setSubW(100);
+		options.createPath(opts);
 			moving = false;
 		}
 	}
@@ -92,6 +107,10 @@ public class Object {
 	}
 	
 	public void update() {
+	}
+	
+	public void setID(int id) {
+		this.id = id;
 	}
 	
 }

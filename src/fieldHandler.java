@@ -23,7 +23,13 @@ public class fieldHandler {
 	
 	
 	
+	public String getMessage() {
+		return OH.getMessage();
+	}
 	
+	public void deleteObject(int id) {
+		OH.deleteObject(id);
+	}
 	
 	
 	public void stopMove() {

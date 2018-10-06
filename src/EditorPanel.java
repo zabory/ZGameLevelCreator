@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -27,6 +28,7 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 	boolean test;
 	Placeables toPlace;
 	int MX, MY, startX, startY, origX, origY;
+
 	
 	/**
 	 * constructor for the game
@@ -50,6 +52,7 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		moving = false;
 		origX = 0;
 		origY = 0;
+		
 	}
 	/**
 	 * an update method for updating everything in the game, it goes down through all the classes and updates everything 
@@ -120,7 +123,7 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		//Object tree
 		if(message.contains("Objects")) {
 				if(message.contains("Wizard") && message.contains("Monsters")) {
-					toPlace = new Placeables(50,50,"Object");
+					toPlace = new Placeables(50,50,"Object", "Waizard");
 					placing = true;
 				}
 			
@@ -128,7 +131,7 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		//Tile tree
 		else if(message.contains("Tiles")) {
 				if(message.contains("Floor")) {
-					toPlace = new Placeables(50,50,"Tile");
+					toPlace = new Placeables(50,50,"Tile","Floor");
 					placing = true;
 				}
 			}
@@ -146,6 +149,23 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 					}else {
 						moving = true;
 					}
+				}
+			}
+		//object handler tree
+		else if(message.contains("object")) {
+				if(message.contains("Delete")) {
+					String man = message;
+					int id = -1;
+					man = message.substring(7, message.length() - 8);
+					System.out.println(man);
+					id = Integer.parseInt(man);
+					
+					FH.deleteObject(id);
+					
+				}else if(message.contains("Attributes")) {
+					
+						
+					
 				}
 			}
 		}
@@ -241,6 +261,11 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 			toPlace.mousePressed(arg0);
 		}
 		message = topBar.getMessage();
+		if(field) {
+			if(!FH.getMessage().equals("")) {
+				message = FH.getMessage();
+			}
+		}
 	}
 	@Override
 	public void mouseReleased(MouseEvent arg0) {

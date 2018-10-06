@@ -116,6 +116,9 @@ public class Button {
 		}else if(!open && inBounds(mx, my)) {
 			Open();
 		}
+		
+		
+		
 		/*
 		boolean clickedOn = false;
 		if(inBounds(mx,my)) {

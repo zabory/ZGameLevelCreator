@@ -9,12 +9,14 @@ public class Placeables {
 	int height = 16;
 	int width = 16;
 	int mouseX, mouseY;
+	String oType;
 	
-	public Placeables(int x, int y, String type) {
+	public Placeables(int x, int y, String type, String oType) {
 		this.x = x;
 		this.y = y;
 		this.type = type;
 		size = 1;
+		this.oType = type;
 	}
 	
 	public void keyPressed(KeyEvent e) {
@@ -67,7 +69,7 @@ public class Placeables {
 	
 	
 	public Object toObject() {
-		Object o = new Object(x,y);
+		Object o = new Object(x,y,-1,oType);
 		return o;
 	}
 	
