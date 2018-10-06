@@ -124,7 +124,19 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		//Object tree
 		if(message.contains("Objects")) {
 				if(message.contains("Wizard") && message.contains("Monsters")) {
-					toPlace = new Placeables(50,50,"Object", "Waizard");
+					toPlace = new Placeables(50,50,"Object", "Wizard");
+					placing = true;
+				}else if(message.contains("Skeleton") && message.contains("Monsters")) {
+					toPlace = new Placeables(50,50,"Object", "Skeleton");
+					placing = true;
+				}else if(message.contains("Alchemist") && message.contains("Monsters")) {
+					toPlace = new Placeables(50,50,"Object", "Alchemist");
+					placing = true;
+				}else if(message.contains("Archer") && message.contains("Monsters")) {
+					toPlace = new Placeables(50,50,"Object", "Archer");
+					placing = true;
+				}else if(message.contains("Knight") && message.contains("Monsters")) {
+					toPlace = new Placeables(50,50,"Object", "Knight");
 					placing = true;
 				}
 			

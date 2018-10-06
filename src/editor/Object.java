@@ -28,8 +28,19 @@ public class Object {
 		height = 16;
 		width = 16;
 		this.type = type;
+		System.out.println("Type: " + type);
 		try {
-		    icon = ImageIO.read(new File("WizardHat.png"));
+			if(type.equals("Wizard")) {
+				icon = ImageIO.read(new File("WizardHat.png"));
+			}else if(type.equals("Skeleton")) {
+				icon = ImageIO.read(new File("Skeleton.png"));	
+			}else if(type.equals("Alchemist")) {
+				icon = ImageIO.read(new File("Alchemist.png"));	
+			}else if(type.equals("Archer")) {
+				icon = ImageIO.read(new File("Archer.png"));	
+			}else if(type.equals("Knight")) {
+				icon = ImageIO.read(new File("Knight.png"));	
+			}
 		} catch (IOException e) {
 			
 		}
@@ -65,7 +76,6 @@ public class Object {
 		//g.fillOval(x, y, height, width);
 		g.drawImage(icon, x, y, null);
 		options.paint(g);
-		g.drawString( id + "", x + width / 2, y + height);
 	}
 	
 	public void MousePressed(int x, int y, MouseEvent e) {

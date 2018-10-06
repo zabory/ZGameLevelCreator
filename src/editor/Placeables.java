@@ -17,7 +17,7 @@ public class Placeables {
 		this.y = y;
 		this.type = type;
 		size = 1;
-		this.oType = type;
+		this.oType = oType;
 	}
 	
 	public void keyPressed(KeyEvent e) {

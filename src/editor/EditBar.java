@@ -15,15 +15,12 @@ public class EditBar {
 		
 		String[] trapSub = {"Spikes" , "Arrow" , "Fake chest"};
 		String[] objectiveSub = {"P spawn" , "Exit"};
-		String[] monsterSub = {"Skeleton" , "Wizard" , "Alchemist", "Archer" , "Knight" , "Warrior"};
+		String[] monsterSub = {"Skeleton" , "Wizard" , "Alchemist", "Archer" , "Knight"};
 		String[] towerSub = {"Archer" , "Wizard"};
 		
 		String[] threats = {"Major" , "Minor"};
 		
-		String[] skeletonSub = {"Grunt","Boss"};
-		
-		String[] sSub = {"Giant" , "Large" , "Medium" , "Small"};
-		String[] sSub2 = {"Blue" , "Red", "Green" , "Orange"};
+	
 		
 		String[] views = {"Move view" , "Grid"};
 		
@@ -51,9 +48,6 @@ public class EditBar {
 		buttons[1].getButton("Monsters").createPath(monsterSub);
 		buttons[1].getButton("Misc").createPath(misc);
 		
-		buttons[1].getButton("Monsters").getButton("Skeleton").createPath(skeletonSub);
-		buttons[1].getButton("Monsters").getButton("Skeleton").getButton("Boss").createPath(sSub);
-		buttons[1].getButton("Monsters").getButton("Skeleton").getButton("Boss").getButton("Medium").createPath(sSub2);
 		
 		buttons[1].getButton("Towers").createPath(towerSub);
 		
