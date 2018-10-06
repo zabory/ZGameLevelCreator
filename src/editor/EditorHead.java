@@ -1,3 +1,4 @@
+package editor;
 import java.awt.Color;
 import javax.swing.JFrame;
 
@@ -15,8 +16,6 @@ public class EditorHead extends JFrame{
 		add(editor);
 		setVisible(true);
 	}
-	public static void main(String[] args){
-		new EditorHead();
-	}
+
 
 }

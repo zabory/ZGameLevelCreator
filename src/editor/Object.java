@@ -1,3 +1,4 @@
+package editor;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -9,6 +10,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+
+import elements.Button;
 
 public class Object {
 	String type;
