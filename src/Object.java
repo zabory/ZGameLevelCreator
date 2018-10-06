@@ -16,6 +16,7 @@ public class Object {
 	boolean moving, gridMove;
 	BufferedImage icon;
 	Button options;
+	String[] opts = {"Delete" , "Attributes", "Count"};
 	
 	public Object(int x, int y) {
 		this.x = x;
@@ -31,7 +32,6 @@ public class Object {
 		options = new Button(x,y,height,width,"",2);
 		options.setSubH(16);
 		options.setSubW(100);
-		String[] opts = {"Delete" , "Attributes"};
 		options.createPath(opts);
 	}
 	
@@ -53,21 +53,28 @@ public class Object {
 	}
 	
 	public void MousePressed(int x, int y, MouseEvent e) {
-		if(inBounds(x, y)) {
+		if(inBounds(x, y) && e.getButton() == 1) {
 			moving = true;
 		}
-		options.mousePressed(e);
+		if(e.getButton() == 3) {
+			System.out.print("Right clicked");
+			options.mousePressed(e);
+		}
 	}
 	
 	public void MouseReleased(MouseEvent e) {
 		MX = e.getX();
 		MY = e.getY();
 		if(moving) {
+			options = new Button(x,y,height,width,"",2);
+			options.createPath(opts);
 			int mouseX, mouseY;
 			mouseX = e.getX();
 			mouseY = e.getY();
 		x = (mouseX / width) * width;
 		y = (mouseY / height) * height;
+		options.setX(x);
+		options.setY(y);
 			moving = false;
 		}
 	}
@@ -85,7 +92,6 @@ public class Object {
 	}
 	
 	public void update() {
-		options.update();
 	}
 	
 }

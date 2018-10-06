@@ -55,9 +55,8 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 	 * an update method for updating everything in the game, it goes down through all the classes and updates everything 
 	 */
 	public void update(){
-		topBar.update();
-		message = topBar.getMessage();
 		if(!message.equals(lastMessage) && !message.equals("")) {
+			System.out.println("Checking for message");
 			System.out.println("Message: " + message);
 			messageHandler(message);
 			topBar.resetMenus();
@@ -65,9 +64,7 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 			lastMessage = message;
 		}
 
-		if(field) {
-			FH.update();
-		}
+		
 	}
 	
 	/**
@@ -215,6 +212,7 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 						}
 				}
 			}else{
+				
 				if(toPlace.getType().equals("Object")) {
 					System.out.println("Adding object");
 					FH.addObject(toPlace.toObject());
@@ -226,6 +224,9 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		}//end left click
 		//right click
 		if(arg0.getButton() == 3) {
+			if(field) {
+				FH.MousePressed(arg0.getX(), arg0.getY(), arg0);
+			}
 			if(moving) {
 				moving = false;
 			}
@@ -239,8 +240,7 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		if(placing) {
 			toPlace.mousePressed(arg0);
 		}
-		
-		
+		message = topBar.getMessage();
 	}
 	@Override
 	public void mouseReleased(MouseEvent arg0) {

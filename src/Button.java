@@ -71,13 +71,7 @@ public class Button {
 	}
 	
 	public void update() {
-		if(tickWait <= 0 && tickWait != 50) {
-		open = false;
-		tickWait = 50;
-		}
-		if(tickWait != 50){
-			tickWait--;
-		}
+		
 	}
 	
 	/**
@@ -122,7 +116,7 @@ public class Button {
 		}else if(!open && inBounds(mx, my)) {
 			Open();
 		}
-		
+		/*
 		boolean clickedOn = false;
 		if(inBounds(mx,my)) {
 			clickedOn = true;
@@ -139,7 +133,7 @@ public class Button {
 		if(!clickedOn) {
 			Close();
 		}
-		
+		*/
 		
 	}
 	
@@ -154,7 +148,7 @@ public class Button {
 		subPaths = new Button[paths.length];
 		for(int i = 0; i < paths.length; i++) {
 			if(type != 2) {
-			subPaths[i] = new Button(startX + width, startY + (height * i), height, width, paths[i]);
+				subPaths[i] = new Button(startX + width, startY + (height * i), height, width, paths[i]);
 			}else {
 				subPaths[i] = new Button(startX + width, startY + (height * i), subH, subW, paths[i]);
 			}
@@ -233,9 +227,7 @@ public class Button {
 				}
 			}
 		}
-		
 		return message;
-		
 	}
 
 	
