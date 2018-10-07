@@ -49,6 +49,7 @@ public class Object {
 		options.setSubW(100);
 		options.createPath(opts);
 		this.id = id;
+		
 	}
 	
 	public int getID() {
