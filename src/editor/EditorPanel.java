@@ -25,7 +25,7 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 	static EditBar topBar;
 	String message, lastMessage;
 	fieldHandler FH;
-	boolean field, placing, grid, moving;
+	boolean field, placing, grid, moving, zView;
 	boolean test;
 	Placeables toPlace;
 	int MX, MY, startX, startY, origX, origY;
@@ -51,6 +51,7 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		test = true;
 		placing = false;
 		moving = false;
+		zView = false;
 		origX = 0;
 		origY = 0;
 		
@@ -76,7 +77,6 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 	 */
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		g.translate(origX, origY);
 		if(field) {	
 			FH.paint(g);
 		}
@@ -92,9 +92,10 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 				g.drawLine(0, i, 1920, i);
 			}
 		}
-	
+		if(zView) {
+			g.drawRect(((MX/16) * 16) - (16 * 8), ((MY/16) * 16) - (16 * 8), 16* 16, 16 * 16);
+		}
 		
-		g.translate(-origX,-origY);
 		
 		
 		
@@ -156,11 +157,11 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 					}else {
 						grid = true;
 					}
-				}else if(message.contains("Move view")) {
-					if(moving) {
-						moving = false;
+				}else if(message.contains("Zoom view")) {
+					if(zView) {
+						zView = false;
 					}else {
-						moving = true;
+						zView = true;
 					}
 				}
 			}
@@ -236,7 +237,7 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		//left click
 		
 		if(arg0.getButton() == 1) {
-			if(!placing) {
+			if(!placing && !zView) {
 				if(test) {
 					test = false;
 						topBar.mousePressed(arg0);
@@ -244,7 +245,7 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 							FH.MousePressed(arg0.getX(), arg0.getY(), arg0);
 						}
 				}
-			}else{
+			}else if(placing){
 				
 				if(toPlace.getType().equals("Object")) {
 					System.out.println("Adding object");
@@ -253,6 +254,8 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 					System.out.println("Adding tile");
 					FH.addTile(toPlace.toTile());
 				}
+			}else if(zView) {
+				zView = false;
 			}
 		}//end left click
 		//right click
