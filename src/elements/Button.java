@@ -38,7 +38,7 @@ public class Button {
 		type = 0;
 	}
 	/**
-	 * constructor for top button graphicall of the buttons (aka main button)
+	 * constructor for top button graphic all of the buttons (aka main button)
 	 * @param x
 	 * @param y
 	 * @param height
