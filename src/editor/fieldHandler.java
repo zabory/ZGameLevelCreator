@@ -16,7 +16,7 @@ public class fieldHandler {
 		OH = new objectHandler();
 		TH = new tileHandler();
 		name = "Un-named Level";
-		f = new Font("Courier New", Font.PLAIN, 40);
+		f = new Font("Old English Text MT", Font.PLAIN, 40);
 		xOrig = 0;
 		yOrig = 0;
 	}
