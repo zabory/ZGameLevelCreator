@@ -6,6 +6,8 @@ import java.awt.event.WindowListener;
 
 import javax.swing.JFrame;
 
+import editor.fieldHandler;
+
 
 
 public class zoomedEditorHead extends JFrame{
@@ -13,10 +15,10 @@ public class zoomedEditorHead extends JFrame{
 	private zoomedEditorPanel editor;
 	
 	public zoomedEditorHead(){
-		setSize(500, 500);
+		setSize(900, 900);
 		setTitle("ZGame level editor");
 		setBackground(Color.WHITE);
-		//setResizable(false);
+		setResizable(false);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		editor = new zoomedEditorPanel(this);
 		add(editor);
@@ -74,5 +76,13 @@ public class zoomedEditorHead extends JFrame{
 		
 		
 	}
+	
+	
+	public void setField(fieldHandler FH, int x, int y) {
+		editor.setField(FH,x,y);
+	}
+
+
+
 
 }

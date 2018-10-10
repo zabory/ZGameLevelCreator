@@ -2,6 +2,8 @@ package editor;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
+import elements.Object;
+
 public class objectHandler {
 	
 	Object[] objects;

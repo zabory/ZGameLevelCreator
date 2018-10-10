@@ -3,6 +3,9 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
+import elements.Object;
+import elements.Tile;
+
 public class fieldHandler {
 
 	objectHandler OH;
@@ -79,5 +82,18 @@ public class fieldHandler {
 		TH.paint(g);
 		OH.paint(g);
 	}
+	
+	public boolean hasTile(int x, int y) {
+		return TH.hasTile(x,y);
+	}
+	
+	
+	public Tile getTile(int x, int y) {
+		return TH.getTile(x,y);
+	}
+	
+	
+	
+	
 
 }

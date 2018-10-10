@@ -7,13 +7,12 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import editor.EditorHead;
+import editor.fieldHandler;
 
 
 
@@ -25,6 +24,8 @@ public class zoomedEditorPanel extends JPanel implements ActionListener, KeyList
 	 */
 	private static final long serialVersionUID = 1L;
 	static zoomedEditorHead game;
+	static fieldHandler FH;
+	static int x,y;
 	
 	public zoomedEditorPanel(zoomedEditorHead zoomedEditorHead){
 		zoomedEditorPanel.game = zoomedEditorHead;
@@ -34,15 +35,6 @@ public class zoomedEditorPanel extends JPanel implements ActionListener, KeyList
 		addMouseMotionListener(this);
 		addKeyListener(this);
 		setFocusable(true);
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	}
 
 	
@@ -123,7 +115,17 @@ public class zoomedEditorPanel extends JPanel implements ActionListener, KeyList
 	}
 
 
-
+	public void setField(fieldHandler FH, int x, int y) {
+		this.x = x;
+		this.y = y;
+		
+		
+		
+		
+		
+		
+		
+	}
 
 
 	

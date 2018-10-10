@@ -1,7 +1,8 @@
 package editor;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
+
+import elements.Tile;
 
 public class tileHandler {
 	
@@ -104,10 +105,24 @@ public class tileHandler {
 	}
 
 
+	public boolean hasTile(int x, int y) {
+		boolean answer = false;
+		for(int i = 0; i < tileCounter && ! answer; i++) {
+			answer = tiles[i].inBounds(x, y);
+		}
+		return answer;
+	}
 	
 	
-	
-	
+	public Tile getTile(int x, int y) {
+		Tile answer = null;
+		for(int i = 0; i < tileCounter; i++) {
+			if(tiles[i].inBounds(x, y)) {
+				answer = tiles[i];
+			}
+		}
+		return answer;
+	}
 
 
 

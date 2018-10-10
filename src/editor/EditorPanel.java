@@ -58,8 +58,6 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		zView = false;
 		origX = 0;
 		origY = 0;
-		
-		
 	}
 	/**
 	 * an update method for updating everything in the game, it goes down through all the classes and updates everything 
@@ -97,16 +95,17 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 				g.drawLine(0, i, 1920, i);
 			}
 		}
-		if(zView) {
-			g.drawRect(((MX/16) * 16) - (16 * 8), ((MY/16) * 16) - (16 * 8), 16* 16, 16 * 16);
-		}
 		
 		
 		
 		
 		g.setColor(Color.BLACK);
 		topBar.paint(g);
-		
+		if(zView) {
+			g.setColor(new Color(0,0,0,50));
+			g.fillRect(((MX/16) * 16) - (16 * 9), ((MY/16) * 16) - (16 * 9), 16 * 18, 16 * 18);
+			g.setColor(Color.BLACK);
+		}
 		
 	}
 	
@@ -235,18 +234,18 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		if(moving) {
-			MX = arg0.getX();
-			MY = arg0.getY();
-		}
+		MX = arg0.getX();
+		MY = arg0.getY();
+
 		//left click
-		if(zView) {
-			ze = new zoomedEditorHead();
-		}
 		
 		
 		
 		if(arg0.getButton() == 1) {
+			if(zView) {
+				ze = new zoomedEditorHead();
+				ze.setField(FH,MX,MY);
+			}
 			if(!placing && !zView) {
 				if(test) {
 					test = false;
@@ -373,6 +372,23 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public fieldHandler getField() {
+		return FH;
+	}
+	
+	
+	
+	
+	
 	
 
 }
