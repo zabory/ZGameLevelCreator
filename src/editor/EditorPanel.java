@@ -8,17 +8,20 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+
+import zoomedEditor.zoomedEditorHead;
 /**
  * The game panel. controls everything
  * @author Ben Shabowski
  *
  */
-public class EditorPanel extends JPanel implements ActionListener, KeyListener, MouseListener, MouseMotionListener {
+public class EditorPanel extends JPanel implements ActionListener, KeyListener, MouseListener, MouseMotionListener, WindowListener {
 	private static final long serialVersionUID = 1L;
 	//private GameHead game;
 	EditorHead game;
@@ -29,6 +32,7 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 	boolean test;
 	Placeables toPlace;
 	int MX, MY, startX, startY, origX, origY;
+	static zoomedEditorHead ze;
 
 	
 	/**
@@ -54,6 +58,7 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		zView = false;
 		origX = 0;
 		origY = 0;
+		
 		
 	}
 	/**
@@ -235,6 +240,11 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 			MY = arg0.getY();
 		}
 		//left click
+		if(zView) {
+			ze = new zoomedEditorHead();
+		}
+		
+		
 		
 		if(arg0.getButton() == 1) {
 			if(!placing && !zView) {
@@ -259,6 +269,9 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 			}
 		}//end left click
 		//right click
+		if(zView) {
+			zView = false;
+		}
 		if(arg0.getButton() == 3) {
 			if(field) {
 				FH.MousePressed(arg0.getX(), arg0.getY(), arg0);
@@ -325,6 +338,40 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		int[] xPoints = {x + thickness,x2 + thickness, x2 - thickness, x - thickness};
 		int[] yPoints = {y - thickness, y2 - thickness, y2 + thickness, y + thickness};
 		g.fillPolygon(xPoints, yPoints, 4);
+	}
+	@Override
+	public void windowActivated(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void windowClosed(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+	}
+	@Override
+	public void windowClosing(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void windowDeactivated(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void windowDeiconified(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void windowIconified(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void windowOpened(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 

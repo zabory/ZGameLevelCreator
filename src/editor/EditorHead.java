@@ -8,7 +8,7 @@ public class EditorHead extends JFrame{
 	
 	public EditorHead(){
 		setSize(500, 500);
-		setTitle("ZGame level editor");
+		setTitle("ZGame zoomed Level Editor");
 		setBackground(Color.WHITE);
 		//setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -16,6 +16,5 @@ public class EditorHead extends JFrame{
 		add(editor);
 		setVisible(true);
 	}
-
 
 }
