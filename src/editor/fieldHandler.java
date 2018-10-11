@@ -25,7 +25,9 @@ public class fieldHandler {
 	}
 	
 	
-	
+	public String getName() {
+		return name;
+	}
 	
 	public String getMessage() {
 		return OH.getMessage();
@@ -60,9 +62,9 @@ public class fieldHandler {
 		TH.addTile(tiles);
 	}
 
-	public void MousePressed(int x, int y, MouseEvent e) {
-		OH.MousePressed(x,y,e);
-		TH.MousePressed(x,y);
+	public void MousePressed(MouseEvent e) {
+		OH.MousePressed(e);
+		TH.MousePressed(e);
 		
 	}
 	

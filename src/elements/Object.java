@@ -14,7 +14,7 @@ public class Object {
 	boolean moving, gridMove;
 	BufferedImage icon;
 	Button options;
-	String[] opts = {"Delete" , "Attributes", "Count"};
+	String[] opts = {"Delete" , "Attributes"};
 	
 	public Object(int x, int y, int id, String type) {
 		this.x = x;

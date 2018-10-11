@@ -8,6 +8,8 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
@@ -21,7 +23,7 @@ import zoomedEditor.zoomedEditorHead;
  * @author Ben Shabowski
  *
  */
-public class EditorPanel extends JPanel implements ActionListener, KeyListener, MouseListener, MouseMotionListener, WindowListener {
+public class EditorPanel extends JPanel implements ActionListener, KeyListener, MouseListener, MouseMotionListener, MouseWheelListener {
 	private static final long serialVersionUID = 1L;
 	//private GameHead game;
 	EditorHead game;
@@ -48,6 +50,7 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		addKeyListener(this);
+		addMouseWheelListener(this);
 		setFocusable(true);
 		message = "";
 		lastMessage = "";
@@ -71,8 +74,6 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 			message = "";
 			lastMessage = message;
 		}
-
-		
 	}
 	
 	/**
@@ -80,6 +81,16 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 	 */
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
+		g.translate(-origX, -origY);
+		if(grid) {
+			for(int i = -8000; i < 8000; i += 16) {
+				g.drawLine(i, -8000, i, 8000);
+			}
+			for(int i = -8000; i < 8000; i += 16) {
+				g.drawLine(-8000, i, 8000, i);
+			}
+		}
+		
 		if(field) {	
 			FH.paint(g);
 		}
@@ -87,19 +98,12 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 			toPlace.paint(g);
 		}
 		
-		if(grid) {
-			for(int i = 0; i < 1920; i += 16) {
-				g.drawLine(i, 0, i, 1080);
-			}
-			for(int i = 0; i < 1080; i += 16) {
-				g.drawLine(0, i, 1920, i);
-			}
-		}
 		
 		
 		
 		
 		g.setColor(Color.BLACK);
+		g.translate(origX, origY);
 		topBar.paint(g);
 		if(zView) {
 			g.setColor(new Color(0,0,0,50));
@@ -122,7 +126,7 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 				origX = 0;
 				origY = 0;
 				}else if(message.contains("Rename") && field) {
-				String newName = JOptionPane.showInputDialog("Enter new name:");
+					String newName = JOptionPane.showInputDialog("Enter new name:");
 				FH.changeName(newName);
 			}
 		}else if(field) {
@@ -161,11 +165,14 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 					}else {
 						grid = true;
 					}
-				}else if(message.contains("Zoom view")) {
-					if(zView) {
-						zView = false;
+				}else if(message.contains("Return")) {
+					origX = 0;
+					origY = 0;
+				}else if(message.contains("Move view")) {
+					if(moving) {
+						moving = false;
 					}else {
-						zView = true;
+						moving = true;
 					}
 				}
 			}
@@ -236,25 +243,28 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		// TODO Auto-generated method stub
 		MX = arg0.getX();
 		MY = arg0.getY();
-
+		
 		//left click
-		
-		
 		
 		if(arg0.getButton() == 1) {
 			if(zView) {
+				arg0.translatePoint(origX, origY);
 				ze = new zoomedEditorHead();
 				ze.setField(FH,MX,MY);
+				arg0.translatePoint(-origX, -origY);
 			}
-			if(!placing && !zView) {
+			if(!placing && !zView && !moving) {
 				if(test) {
 					test = false;
 						topBar.mousePressed(arg0);
 						if(field) {
-							FH.MousePressed(arg0.getX(), arg0.getY(), arg0);
+							arg0.translatePoint(origX, origY);
+							FH.MousePressed(arg0);
+							arg0.translatePoint(-origX, -origY);
 						}
 				}
 			}else if(placing){
+				arg0.translatePoint(origX, origY);
 				
 				if(toPlace.getType().equals("Object")) {
 					System.out.println("Adding object");
@@ -263,6 +273,7 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 					System.out.println("Adding tile");
 					FH.addTile(toPlace.toTile());
 				}
+				arg0.translatePoint(-origX, -origY);
 			}else if(zView) {
 				zView = false;
 			}
@@ -273,7 +284,9 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		}
 		if(arg0.getButton() == 3) {
 			if(field) {
-				FH.MousePressed(arg0.getX(), arg0.getY(), arg0);
+				arg0.translatePoint(origX, origY);
+				FH.MousePressed(arg0);
+				arg0.translatePoint(-origX, -origY);
 			}
 			if(moving) {
 				moving = false;
@@ -286,12 +299,16 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		}//end right click
 		
 		if(placing) {
+			arg0.translatePoint(origX, origY);
 			toPlace.mousePressed(arg0);
+			arg0.translatePoint(-origX, -origY);
 		}
 		message = topBar.getMessage();
 		if(field) {
 			if(!FH.getMessage().equals("")) {
+				arg0.translatePoint(origX, origY);
 				message = FH.getMessage();
+				arg0.translatePoint(-origX, -origY);
 			}
 		}
 	}
@@ -300,11 +317,13 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		// TODO Auto-generated method stub
 		test = true;
 		if(field) {
+			arg0.translatePoint(origX, origY);
 			FH.MouseReleased(arg0);
+			arg0.translatePoint(-origX, -origY);
 		}
 		if(moving) {
-			origX = origX - (MX - arg0.getX());
-			origY = origY - (MY - arg0.getY());
+			origX = origX - (arg0.getX() - MX);
+			origY = origY - (arg0.getY() - MY);
 			System.out.println("Shift X: " + origX);
 			System.out.println("Shift Y: " + origY);
 		}
@@ -318,7 +337,9 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		MX = arg0.getX();
 		MY = arg0.getY();
 		if(placing) {
+			arg0.translatePoint(origX, origY);
 			toPlace.mouseMoved(arg0);
+			arg0.translatePoint(-origX, -origY);
 		}
 	}
 	
@@ -338,51 +359,12 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		int[] yPoints = {y - thickness, y2 - thickness, y2 + thickness, y + thickness};
 		g.fillPolygon(xPoints, yPoints, 4);
 	}
-	@Override
-	public void windowActivated(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void windowClosed(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-	}
-	@Override
-	public void windowClosing(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void windowDeactivated(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void windowDeiconified(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void windowIconified(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void windowOpened(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public fieldHandler getField() {
 		return FH;
+	}
+	@Override
+	public void mouseWheelMoved(MouseWheelEvent arg0) {
+		// TODO Auto-generated method stub
 	}
 	
 	

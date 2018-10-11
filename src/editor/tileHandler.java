@@ -86,7 +86,9 @@ public class tileHandler {
 		
 	}
 	
-	public void MousePressed(int x, int y) {
+	public void MousePressed(MouseEvent e) {
+		int x = e.getX();
+		int y = e.getY();
 		for(int i = 0; i < tileCounter; i++) {
 			tiles[i].MousePressed(x, y);
 		}

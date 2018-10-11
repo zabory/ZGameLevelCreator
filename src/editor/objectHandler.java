@@ -85,7 +85,9 @@ public class objectHandler {
 		
 	}
 	
-	public void MousePressed(int x, int y, MouseEvent e) {
+	public void MousePressed(MouseEvent e) {
+		int x = e.getX();
+		int y = e.getY();
 		for(int i = 0; i < objectCounter; i++) {
 			objects[i].MousePressed(x,y,e);
 		}

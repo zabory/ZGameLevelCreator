@@ -22,7 +22,7 @@ public class EditBar {
 		
 	
 		
-		String[] views = {"Grid", "Zoom view"};
+		String[] views = {"Grid", "Move view", "Return"};
 		
 		String[] files = {"New" , "Open" , "Export", "Rename"};
 		
