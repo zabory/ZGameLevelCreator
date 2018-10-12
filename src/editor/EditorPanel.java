@@ -10,14 +10,11 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import zoomedEditor.zoomedEditorHead;
 /**
  * The game panel. controls everything
  * @author Ben Shabowski
@@ -34,7 +31,6 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 	boolean test;
 	Placeables toPlace;
 	int MX, MY, startX, startY, origX, origY;
-	static zoomedEditorHead ze;
 
 	
 	/**
@@ -247,12 +243,6 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		//left click
 		
 		if(arg0.getButton() == 1) {
-			if(zView) {
-				arg0.translatePoint(origX, origY);
-				ze = new zoomedEditorHead();
-				ze.setField(FH,MX,MY);
-				arg0.translatePoint(-origX, -origY);
-			}
 			if(!placing && !zView && !moving) {
 				if(test) {
 					test = false;

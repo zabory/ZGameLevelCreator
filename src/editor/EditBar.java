@@ -15,7 +15,16 @@ public class EditBar {
 		
 		String[] trapSub = {"Spikes" , "Arrow" , "Fake chest"};
 		String[] objectiveSub = {"P spawn" , "Exit"};
-		String[] monsterSub = {"Skeleton" , "Wizard" , "Alchemist", "Archer" , "Knight"};
+		String[] monsterSub = {"Beasts" , "Ghosts" , "Undead", "Mechs" , "Arthropods" , "Slimes"};
+		
+		String[] beastSub = {"Wolf", "Bat", "Snake", "Rat"};
+		String[] ghostSub = {"Knight" , "Wizard"};
+		String[] UndeadSub = {"Zombies" , "Skeletons" , "Vampire"};
+		String[] undeadZombieSub = {"Knight" , "Wizard", "Wolf"};
+		String[] undeadSkeletonSub = {"Knight", "Archer" , "Wizard", "Wolf", "Bat"};
+		String[] mechSub = {"test" , "test" , "test"};
+		String[] arthSub = {"Spider" , "Bug", "Wasp"};
+		
 		String[] towerSub = {"Archer" , "Wizard"};
 		
 		String[] threats = {"Major" , "Minor"};
@@ -24,7 +33,7 @@ public class EditBar {
 		
 		String[] views = {"Grid", "Move view", "Return"};
 		
-		String[] files = {"New" , "Open" , "Export", "Rename"};
+		String[] files = {"New" , "Open" , "Export", "Rename" , "Verify"};
 		
 		String[] misc = {"Barrel" , "Crate" , "Statue"};
 
@@ -47,9 +56,16 @@ public class EditBar {
 		
 		buttons[1].getButton("Monsters").createPath(monsterSub);
 		buttons[1].getButton("Misc").createPath(misc);
-		
-		
 		buttons[1].getButton("Towers").createPath(towerSub);
+		
+		buttons[1].getButton("Monsters").getButton("Beasts").createPath(beastSub);
+		buttons[1].getButton("Monsters").getButton("Ghosts").createPath(ghostSub);
+		buttons[1].getButton("Monsters").getButton("Undead").createPath(UndeadSub);
+		buttons[1].getButton("Monsters").getButton("Undead").getButton("Zombies").createPath(undeadZombieSub);
+		buttons[1].getButton("Monsters").getButton("Undead").getButton("Skeletons").createPath(undeadSkeletonSub);
+		buttons[1].getButton("Monsters").getButton("Mechs").createPath(mechSub);
+		buttons[1].getButton("Monsters").getButton("Arthropods").createPath(arthSub);
+		
 		
 		buttons[2].getButton("Objectives").createPath(objectiveSub);
 		buttons[2].getButton("Traps").createPath(trapSub);

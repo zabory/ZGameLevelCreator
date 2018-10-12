@@ -16,6 +16,8 @@ public class Object {
 	Button options;
 	String[] opts = {"Delete" , "Attributes"};
 	
+	//health,speed,mana resistance, physical resistance, frost:fire resistance, piercing:blugeoning resistance, sound:sight agro range
+	
 	public Object(int x, int y, int id, String type) {
 		this.x = x;
 		this.y = y;
