@@ -34,7 +34,7 @@ public class Button {
 		startX = x;
 		startY = y;
 
-		System.out.println("Button <" + name + "> has been created.");
+	
 		type = 0;
 	}
 	/**
@@ -112,15 +112,15 @@ public class Button {
 				subPaths[i].mousePressed(e);
 			}
 		}
-		if(open && inBounds(mx, my)){
+		if(open && inBounds(mx, my) && more){
 			Close();
 		}else if(!open && inBounds(mx, my)) {
 			Open();
 		}
 		
 		
-		
 		/*
+		
 		boolean clickedOn = false;
 		if(inBounds(mx,my)) {
 			clickedOn = true;
@@ -137,8 +137,8 @@ public class Button {
 		if(!clickedOn) {
 			Close();
 		}
-		*/
 		
+		*/
 	}
 	
 	
@@ -199,16 +199,15 @@ public class Button {
 	 * marks open as true to open subDs
 	 */
 	public void Open() {
-		System.out.println("Button <" + name + "> has been opened.");
 		open = true;
 	}
 	/**
 	 * marks open to false, if it has subDs, closes them
 	 */
 	public void Close() {
-		if(open)
-		System.out.println("Button <" + name + "> has been closed.");
-		open = false;
+		if(open) {
+			open = false;
+		}
 		if(more) {
 			for(int i = 0; i < subPaths.length; i++) {
 				subPaths[i].Close();

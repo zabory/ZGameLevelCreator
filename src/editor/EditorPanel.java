@@ -128,20 +128,9 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		}else if(field) {
 		//Object tree
 		if(message.contains("Objects")) {
-				if(message.contains("Wizard") && message.contains("Monsters")) {
-					toPlace = new Placeables(50,50,"Object", "Wizard");
-					placing = true;
-				}else if(message.contains("Skeleton") && message.contains("Monsters")) {
-					toPlace = new Placeables(50,50,"Object", "Skeleton");
-					placing = true;
-				}else if(message.contains("Alchemist") && message.contains("Monsters")) {
-					toPlace = new Placeables(50,50,"Object", "Alchemist");
-					placing = true;
-				}else if(message.contains("Archer") && message.contains("Monsters")) {
-					toPlace = new Placeables(50,50,"Object", "Archer");
-					placing = true;
-				}else if(message.contains("Knight") && message.contains("Monsters")) {
-					toPlace = new Placeables(50,50,"Object", "Knight");
+			//monster tree
+				if(message.contains("Monsters")) {
+					toPlace = new Placeables(MX,MY,"Object", message);
 					placing = true;
 				}
 			
@@ -149,7 +138,7 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		//Tile tree
 		else if(message.contains("Tiles")) {
 				if(message.contains("Floor")) {
-					toPlace = new Placeables(50,50,"Tile","Floor");
+					toPlace = new Placeables(50,50,"Tile",message);
 					placing = true;
 				}
 			}
@@ -293,14 +282,6 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 			toPlace.mousePressed(arg0);
 			arg0.translatePoint(-origX, -origY);
 		}
-		message = topBar.getMessage();
-		if(field) {
-			if(!FH.getMessage().equals("")) {
-				arg0.translatePoint(origX, origY);
-				message = FH.getMessage();
-				arg0.translatePoint(-origX, -origY);
-			}
-		}
 	}
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
@@ -317,6 +298,18 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 			System.out.println("Shift X: " + origX);
 			System.out.println("Shift Y: " + origY);
 		}
+		
+		
+		message = topBar.getMessage();
+		if(field) {
+			if(!FH.getMessage().equals("")) {
+				arg0.translatePoint(origX, origY);
+				message = FH.getMessage();
+				arg0.translatePoint(-origX, -origY);
+			}
+		}
+		
+		
 	}
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
