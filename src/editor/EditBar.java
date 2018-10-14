@@ -9,21 +9,21 @@ public class EditBar {
 	Button[] buttons;
 	
 	public EditBar() {
-		String[] objects = {"Monsters" , "Towers" , "Misc"};
-		String[] tiles = {"Objectives" , "Traps" , "Floor" , "Wall"};
-		String[] areas = {"Monster spawn" , "Threat spawn" , "Shop" , "Send back" , "Obelisk"};
+		String[] objects = {"Monsters", "Towers", "Misc"};
+		String[] tiles = {"Objectives", "Traps", "Floor", "Wall"};
+		String[] areas = {"Monster spawn", "Threat spawn", "Shop", "Send back", "Obelisk"};
 		
-		String[] trapSub = {"Spikes" , "Arrow" , "Fake chest"};
-		String[] objectiveSub = {"P spawn" , "Exit"};
-		String[] monsterSub = {"Beasts" , "Ghosts" , "Undead", "Mechs" , "Arthropods" , "Slimes"};
+		String[] trapSub = {"Spikes", "Arrow", "Fake chest"};
+		String[] objectiveSub = {"P spawn", "Exit"};
+		String[] monsterSub = {"Beasts", "Ghosts", "Undead", "Mechs", "Arthropods", "Slime"};
 		
 		String[] beastSub = {"Wolf", "Bat", "Snake", "Rat"};
-		String[] ghostSub = {"Knight" , "Wizard"};
-		String[] UndeadSub = {"Zombies" , "Skeletons" , "Vampire"};
+		String[] ghostSub = {"Knight", "Wizard"};
+		String[] UndeadSub = {"Zombies", "Skeletons", "Vampire"};
 		String[] undeadZombieSub = {"Knight" , "Wizard", "Wolf"};
 		String[] undeadSkeletonSub = {"Knight", "Archer" , "Wizard", "Wolf", "Bat"};
-		String[] mechSub = {"test" , "test" , "test"};
-		String[] arthSub = {"Spider" , "Bug", "Wasp"};
+		String[] mechSub = {"Spider", "Flying"};
+		String[] arthSub = {"Spider", "Bug", "Wasp"};
 		
 		String[] towerSub = {"Archer" , "Wizard"};
 		

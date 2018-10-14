@@ -125,7 +125,18 @@ public class tileHandler {
 		}
 		return answer;
 	}
-
+	
+	public boolean canPlace(int x, int y) {
+		boolean answer = false;
+		
+		for(int i = 0; i < tileCounter && !answer; i++) {
+			answer = tiles[i].inBounds(x, y);
+		}
+		
+		
+		
+		return answer;
+	}
 
 
 }

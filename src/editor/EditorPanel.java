@@ -245,7 +245,7 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 			}else if(placing){
 				arg0.translatePoint(origX, origY);
 				
-				if(toPlace.getType().equals("Object")) {
+				if(toPlace.getType().equals("Object") && toPlace.getValid()) {
 					System.out.println("Adding object");
 					FH.addObject(toPlace.toObject());
 				}else if(toPlace.getType().equals("Tile")){
@@ -321,7 +321,7 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 		MY = arg0.getY();
 		if(placing) {
 			arg0.translatePoint(origX, origY);
-			toPlace.mouseMoved(arg0);
+			toPlace.mouseMoved(arg0, FH);
 			arg0.translatePoint(-origX, -origY);
 		}
 	}

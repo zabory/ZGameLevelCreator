@@ -1,4 +1,5 @@
 package editor;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -14,6 +15,8 @@ public class Placeables {
 	int width = 16;
 	int mouseX, mouseY;
 	String oType;
+	boolean canPlace;
+	Color c;
 	
 	public Placeables(int x, int y, String type, String oType) {
 		this.x = x;
@@ -21,6 +24,8 @@ public class Placeables {
 		this.type = type;
 		size = 1;
 		this.oType = oType;
+		canPlace = false;
+		c = Color.RED;
 	}
 	
 	public void keyPressed(KeyEvent e) {
@@ -46,7 +51,9 @@ public class Placeables {
 			}
 		}
 		}else if(type.equals("Object")) {
+			g.setColor(c);
 			g.fillOval(x, y, width, height);
+			g.setColor(Color.BLACK);
 		}
 	}
 	
@@ -58,14 +65,31 @@ public class Placeables {
 
 	}
 	
-	public void mouseMoved(MouseEvent e) {
+	public void mouseMoved(MouseEvent e, fieldHandler f) {
 			mouseX = e.getX();
 			mouseY = e.getY();
 		x = (mouseX / width) * width;
 		y = (mouseY / height) * height;
-			
+		
+		if(type.equals("Object")) {
+			if(f.canPlace(mouseX, mouseY)) {
+				c = Color.GREEN;
+				canPlace = true;
+			}else {
+				c = Color.RED;
+				canPlace = false;
+			}
+		}
+		
 		
 	}
+	
+	public boolean getValid() {
+		System.out.println(canPlace);
+		return canPlace;
+	}
+	
+	
 	
 	public String getType() {
 		return type;

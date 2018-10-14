@@ -94,7 +94,14 @@ public class fieldHandler {
 		return TH.getTile(x,y);
 	}
 	
-	
+	public boolean canPlace(int x, int y) {
+		boolean answer = false;
+		
+		answer = TH.canPlace(x,y);
+		
+		
+		return answer;
+	}
 	
 	
 
