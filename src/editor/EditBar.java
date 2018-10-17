@@ -33,15 +33,15 @@ public class EditBar {
 		
 		String[] views = {"Grid", "Move view", "Return"};
 		
-		String[] files = {"New" , "Open" , "Export", "Rename" , "Verify"};
+		String[] files = {"New" , "Open" , "Export", "Rename" ,"Auto-Complete" ,"Verify"};
 		
 		String[] misc = {"Barrel" , "Crate" , "Statue"};
 
 		buttons = new Button[5];
-		buttons[0] = new Button(10,10,25,125,"File", 1);
-		buttons[1] = new Button(135,10,25,150,"Objects", 1);
-		buttons[2] = new Button(285,10,25,185,"Tiles", 1);
-		buttons[3] = new Button(470,10,25,185,"Areas" , 1);
+		buttons[0] = new Button(10,10,25,180,"File", 1);
+		buttons[1] = new Button(190,10,25,150,"Objects", 1);
+		buttons[2] = new Button(340,10,25,185,"Tiles", 1);
+		buttons[3] = new Button(525,10,25,185,"Areas" , 1);
 		
 		buttons[0].createPath(files);
 		

@@ -1,7 +1,9 @@
 package elements;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -10,13 +12,13 @@ import javax.imageio.ImageIO;
 
 public class Object {
 	String type;
-	int x, y, width, height, startX, startY, MX, MY, id, ix, iy;
+	int x, y, width, height, startX, startY, MX, MY, id, ix, iy, rotation;
 	boolean moving, gridMove;
 	BufferedImage[] icon;
 	Button options;
 	String[] opts = {"Delete" , "Attributes"};
 	
-	//health,speed,mana resistance, physical resistance, frost:fire resistance, piercing:blugeoning resistance, sound:sight aggro range
+	//health,speed, mana resistance, physical resistance, frost:fire resistance, piercing:blugeoning resistance, sound:sight aggro range
 	
 	public Object(int x, int y, int id, String type) {
 		icon = new BufferedImage[2];
@@ -139,10 +141,28 @@ public class Object {
 
 	public void paint(Graphics g) {
 		g.setColor(Color.BLACK);
-		//g.fillOval(x, y, height, width);
+		/**
+		 * plain graphics doesn't have a rotate, but graphics2d does, so we make 
+		 * our graphics into a second graphics2d and work with that. 
+		 * 
+		 * Very simply, rotating the image at the center of the image, and a rotation changed by radians, and then rotating it
+		 * back so we don't rotate other images. 
+		 *  
+		 */
+		
+		Graphics2D g2d = (Graphics2D)g;
+		//g2d.rotate(Math.toRadians(rotation), x + (icon[0].getWidth()/2),y + (icon[0].getHeight() / 2));
+		
 		g.drawImage(icon[0], x, y, null);
 		g.drawImage(icon[1], x + ix, y + iy, null);
 		options.paint(g);
+		
+		
+		//g2d.rotate(Math.toRadians(-rotation), x + (icon[0].getWidth()/2),y + (icon[0].getHeight() / 2));
+		
+		
+
+		rotation++;
 	}
 	
 	public void MousePressed(int x, int y, MouseEvent e) {
