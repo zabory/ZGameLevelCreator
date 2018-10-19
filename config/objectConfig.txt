@@ -1,0 +1,35 @@
+Name: Skeletons,Bat
+Health: 10
+Speed: 20
+Mana resistance: 0
+Physical resistance: 0
+frost resistance: 0
+fire resistance: 0
+piercing resistance: 0
+blugeoning resistance: 0
+sound aggro range: 100
+sight aggro range: 10
+
+Name: Skeletons,Wizard
+Health: 50
+Speed: 10
+Mana resistance: 5
+Physical resistance: .5
+frost resistance: 2
+fire resistance: 2
+piercing resistance: 0
+blugeoning resistance: 0
+sound aggro range: 75
+sight aggro range: 25
+
+Name: Beasts,Bat
+Health: 10
+Speed: 20
+Mana resistance: 0
+Physical resistance: 0
+frost resistance: 0
+fire resistance: 0
+piercing resistance: 0
+blugeoning resistance: 0
+sound aggro range: 125
+sight aggro range: 10

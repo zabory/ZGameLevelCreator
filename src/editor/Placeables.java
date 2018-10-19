@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.io.FileNotFoundException;
 
 import elements.Object;
 import elements.Tile;
@@ -96,7 +97,7 @@ public class Placeables {
 	}
 	
 	
-	public Object toObject() {
+	public Object toObject() throws FileNotFoundException {
 		Object o = new Object(x,y,-1,oType);
 		return o;
 	}

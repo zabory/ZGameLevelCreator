@@ -10,6 +10,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.io.FileNotFoundException;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -247,7 +248,12 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 				
 				if(toPlace.getType().equals("Object") && toPlace.getValid()) {
 					System.out.println("Adding object");
-					FH.addObject(toPlace.toObject());
+					try {
+						FH.addObject(toPlace.toObject());
+					} catch (FileNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}else if(toPlace.getType().equals("Tile")){
 					System.out.println("Adding tile");
 					FH.addTile(toPlace.toTile());
