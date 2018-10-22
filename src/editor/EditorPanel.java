@@ -167,7 +167,7 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 				if(message.contains("Delete")) {
 					String man = message;
 					int id = -1;
-					man = message.substring(7, message.length() - 8);
+					man = message.substring(7, message.length() - 7);
 					System.out.println(man);
 					id = Integer.parseInt(man);
 					
@@ -179,6 +179,11 @@ public class EditorPanel extends JPanel implements ActionListener, KeyListener, 
 					
 				}
 			}
+		//tower handler
+		else if(message.contains("Towers")) {
+			
+			
+		}
 		}
 	}
 	

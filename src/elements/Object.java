@@ -18,7 +18,7 @@ public class Object {
 	boolean moving, gridMove;
 	BufferedImage[] icon;
 	Button options;
-	String[] opts = {"Delete" , "Attributes"};
+	String[] opts = {"Delete"};
 	int health, speed;
 	double manaResist, physicalResist, frostResist, fireResist, piercingResist, blugeoningResist, soundAggro, sightAggro;
 	
